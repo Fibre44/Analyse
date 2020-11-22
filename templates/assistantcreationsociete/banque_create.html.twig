@@ -1,0 +1,18 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer un RIB</strong>
+
+    {{form_start(formBanque)}}
+    {{form_row(formBanque.libelle,{'attr': {'placeholder':"Indiquer le nom de votre banque"}}) }}
+    {{form_row(formBanque.iban,{'attr': {'placeholder':"Indiquer le code IBAN"}}) }}
+    {{form_row(formBanque.bic,{'attr': {'placeholder':"Indiquer le code BIC"}}) }}
+    <button type="submit" class="btn btn-primary">Créer un RIB </button>
+    {{form_end(formBanque)}}
+
+<a href="{{ path('assistantcreationsociete_taux_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id})}}" class="btn btn-primary"">Créer un taux AT/a>
+
+
+
+{%endblock%}

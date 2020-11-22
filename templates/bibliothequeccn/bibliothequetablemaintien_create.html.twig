@@ -1,0 +1,19 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer les taux du maintien {{bibliothequecriteremaitien.population}}</h1>
+
+    {{form_start(formTauxmaintien,{'method': 'POST'})}}
+    {{ form_row(formTauxmaintien.anciennetedebut, {'label': 'Debut ancienneté debut'}) }}
+
+    {{form_widget(formTauxmaintien)}}
+    <button type="submit" class="btn btn-primary">Créer un taux de maintien </button>
+
+    {{form_end(formTauxmaintien)}}
+
+<a class="btn btn-primary" href="{{ path('bibliotheque_primeanciennetepopulation_create',{'idbibliothequeccn':bibliothequeccn.id})}}">Créer la prime d'ancienneté</a>
+
+
+
+{%endblock%}

@@ -1,0 +1,43 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+
+    <h1>Créer un code emploi</h1>
+
+    {{form_start(formEmploi)}}
+    {{form_row(formEmploi.codeemploi,{'attr': {'placeholder':"Indiquer le code de l'emploi exemple 001"}}) }}
+    {{form_row(formEmploi.valeur,{'attr': {'placeholder':"Indiquer le libellé de l'emploi"}}) }}
+
+    {{form_widget(formEmploi)}}
+    <button type="submit" class="btn btn-primary">Créer un code emploi</button>
+
+    {{form_end(formEmploi)}}
+
+<table class="emplois">
+   
+    <thead>
+        <tr>
+                
+            <th>Code emploi</th>
+            <th>Libellé emploi</th>
+        </tr>            
+        
+    </thead>
+        <tbody>
+
+            {%for emploi in societe.emplois %}
+                <tr>
+                   
+                    <td>{{emploi.codeemploi}}</td>
+                    <td>{{emploi.valeur}}</td>                                                  
+                </tr>
+            {%endfor%}
+
+           
+        </tbody>
+</table>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_axe_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer les axes analytiques</a>
+
+ {%endblock%}

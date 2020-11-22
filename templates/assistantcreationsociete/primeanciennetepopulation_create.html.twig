@@ -1,0 +1,16 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une population prime ancienneté</h1>
+
+    {{form_start(formPrimeanciennetepopulation)}}
+    {{form_widget(formPrimeanciennetepopulation)}}
+    <button type="submit" class="btn btn-primary">Créer une population prime ancienneté </button>
+
+    {{form_end(formPrimeanciennetepopulation)}}
+
+
+
+
+{%endblock%}

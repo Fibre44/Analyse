@@ -1,0 +1,44 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{% block title %}Proposer une CCN{% endblock %}
+
+{% block body %}
+
+ <p>Vous trouverez ci dessous la liste des CCN de vos projets</p>
+
+     <table class="ccn">
+
+    <thead>
+            <tr>
+                    <th>Titre projet</th>
+                    <th>SIREN</th>
+                    <th>Raison sociale</th>
+                    <th>Idcc</th>
+                    <th>Origine de la CCN</th>     
+                    <th>Voir la CCN</th>
+                    <th>Proposer la CCN</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+            {%for projet in utilisateur.projets %}
+                {%for societe in projet.societes %}
+                    {%for ccn in societe.conventioncollectives %}
+                        <tr>
+                            <th>{{projet.titre}}</td>
+                            <td>{{societe.siren}}</td>
+                            <td>{{societe.raisonsociale}}</td>
+                            <td>{{ccn.idcc}}</td>
+                            <td>{{ccn.origine}}</td>
+                            <td><a href="{{ path('bibliotheque_ccnprojet_show', {'idccnprojet':ccn.id})}}" class="btn btn-primary">Voir la CCN</a></td>
+                            <td><a href="{{ path('bibliotheque_ccnprojet_import', {'idccnprojet':ccn.id})}}" class="btn btn-primary">Proposer la CCN</a></td>
+                        </tr>
+                    {%endfor%}
+                {%endfor%}
+            {%endfor%}
+
+        </tbody>
+     </table>
+
+
+{% endblock %}

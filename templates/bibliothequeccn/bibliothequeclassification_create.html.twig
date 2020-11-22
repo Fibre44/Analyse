@@ -1,0 +1,39 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une classification</h1>
+   {{form_start(formClassification)}}
+   {{form_row(formClassification.type,{'attr': {'placeholder':"Indiquer la valeur"}}) }}
+   {{form_row(formClassification.valeur,{'attr': {'placeholder':"Indiquer la valeur"}}) }}
+   <button type="submit" class="btn btn-primary">Créer une classification</button>
+
+   {{form_end(formClassification)}}
+
+<a class="btn btn-primary" href="{{ path('bibliotheque_criteremaintien_create',{'idbibliothequeccn':bibliothequeccn.id})}}">Créer les critères de maintien</a>
+
+<table class="classifications">
+    
+        <thead>
+            <tr>
+                    <th>Type</th>
+                    <th>Valeur</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for classification in bibliothequeccn.bibliothequeclassifications%}
+                
+                <tr>
+                    <td>{{classification.type}}</td>
+                    <td>{{classification.valeur}}</td>
+                
+                </tr>
+             {%endfor%}
+
+        </tbody>
+</table>
+
+
+{%endblock%}

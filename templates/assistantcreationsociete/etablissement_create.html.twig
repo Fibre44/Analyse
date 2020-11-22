@@ -1,0 +1,23 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+
+    <strong>Créer un établissement sur le SIREN {{societe.siren}}</strong>
+
+    {{form_start(formEtablissement)}}
+    {{form_row(formEtablissement.nic,{'attr': {'placeholder':"Indiquer le NIC de l'établissement"}})}}
+    {{form_row(formEtablissement.libelle,{'attr': {'placeholder':"Indiquer le libellé de l'établissement"}})}}
+    {{form_row(formEtablissement.adresse,{'attr': {'placeholder':"Indiquer l'adresse de l'établissement"}})}}
+    {{form_row(formEtablissement.codepostal,{'attr': {'placeholder':"Indiquer le code postal"}})}}
+    {{form_row(formEtablissement.ville,{'attr': {'placeholder':"Indiquer la ville"}})}}
+    {{form_row(formEtablissement.ape,{'attr': {'placeholder':"Indiquer le code APE"}})}}
+  
+    <button type="submit" class="btn btn-primary">Créer un établissement</button>
+
+    {{form_end(formEtablissement)}}
+
+ 
+
+
+{%endblock%}

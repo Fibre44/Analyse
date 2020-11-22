@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Projet analyse</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('projets')}}">Vos projets</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Assistant création société</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationparametragehrs',{'idprojet':projet.id})}}">Assistant création paramétrage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('projet_analyse',{'idprojet':projet.id})}}">Cahier d'analyse</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Reprise des données</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Cahier de paramétrage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Cahier de recette</a>
+            </li>
+           <li class="nav-item">
+                <a class="nav-link" href="">Tableau de bord projet</a>
+            </li>
+
+
+
+            {% if not app.user%}
+   
+                <li class"nav-item">
+                    <a href="{{ path('security_login')}}" class="nav-link">
+                    Connexion
+                    </a>
+            </li>
+
+            {% else %}
+                <li class"nav-item">
+                    <a href="{{ path('security_registrationlogout')}}" class="nav-link">
+                    Deconnexion
+                    </a>
+                </li>
+
+            {% endif %}
+        </div>
+    </nav>
+
+ 
+     <div class"container">
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </div>
+    </body>
+</html>

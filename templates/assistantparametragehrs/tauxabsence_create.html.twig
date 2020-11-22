@@ -1,0 +1,18 @@
+{% extends 'base_assistanteparametrage.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer un taux d'absence</strong>
+
+    {{form_start(formTauxabsence)}}
+   
+    {{form_widget(formTauxabsence)}}
+
+    <button type="submit" class="btn btn-primary">Créer un taux d'absence</button>
+
+    {{form_end(formTauxabsence)}}
+
+
+
+
+{%endblock%}

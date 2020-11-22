@@ -1,0 +1,35 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+<p>Bibliotheque du projet</p>
+
+<p>Liste des classifications de la CCN {{ccnprojet.idcc}}</p>
+
+<table class="classifications">
+    
+        <thead>
+            <tr>
+                    <th>Type</th>
+                    <th>Valeur</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for classification in ccnprojet.classifications%}
+                <tr>
+                    <td>{{classification.type}}</td>
+                    <td>{{classification.valeur}}</td>
+
+                
+                </tr>
+             {%endfor%}
+
+        </tbody>
+     </table>
+<a class="nav-link" href="{{ path('assistantcreationsociete_add_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id})}}">Ajouter des classifications</a>
+
+<a class="nav-link" href="{{ path('assistantcreationsociete_emploi_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer les emplois</a>
+
+{%endblock%}

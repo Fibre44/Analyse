@@ -1,0 +1,25 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une société</h1>
+
+    {{form_start(formSociete)}}
+    {{form_row(formSociete.siren,{'attr': {'placeholder':"Indiquer le SIREN"}}) }}
+    {{form_row(formSociete.raisonsociale,{'attr': {'placeholder':"Indiquer la raison sociale"}}) }}
+    {{form_row(formSociete.adresse,{'attr': {'placeholder':"Indiquer l'adresse de la société'"}}) }}
+    {{form_row(formSociete.codepostal,{'attr': {'placeholder':"Indiquer le code postal'"}}) }}
+    {{form_row(formSociete.ville,{'attr': {'placeholder':"Indiquer la ville'"}}) }}
+    {{form_row(formSociete.fnal,{'attr': {'placeholder':"Indiquer votre taux de FNAL'"}}) }}
+    {{form_row(formSociete.etendu,{'attr': {'placeholder':"Indiquer votre taux de FNAL'"}}) }}
+
+
+    <button type="submit" class="btn btn-primary">Créer une société</button>
+
+    {{form_end(formSociete)}}
+
+
+
+
+{%endblock%}
+

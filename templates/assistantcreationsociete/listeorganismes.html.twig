@@ -1,0 +1,39 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+<p>Etablissement en cours {{etablissement.libelle}}
+
+  <table class="annuaireorganismes">
+    
+        <thead>
+            <tr>
+                    <th>Libelle</th>
+                    <th>nature</th>
+                    <th>adresse</th>
+                    <th>code postal</th>
+                    <th>ville</th>
+                    <th>affecter l'établissement</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+
+            {%for organismes in annuaireorganismes %}
+                <tr>
+                    <td>{{organismes.libelle}}</td>
+                    <td>{{organismes.nature}}</td>
+                    <td>{{organismes.adresse}}</td>
+                    <td>{{organismes.codepostal}}</td>
+                    <td>{{organismes.ville}}</td>
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id})}}"class="btn btn-primary"" >Selectionner l'oganisme</a></td>
+
+                  
+                </tr>
+            {%endfor%}
+        </tbody>
+     </table>
+
+ 
+{%endblock%}

@@ -1,0 +1,17 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Axe analytique </h1>
+
+   <p>HR Sprint peut gérer jusqu'a 5 axes analytique. Si vous utilisez l'analytique vous devez compléter la longueur des différents axes<p>
+    {{form_start(formAxe)}}
+    {{form_row(formAxe.Axe,{'attr': {'placeholder':"Indiquer le libellé de l'axe"}})}}
+    {{form_row(formAxe.libelle,{'attr': {'placeholder':"Indiquer le libellé de l'axe"}})}}
+    {{form_row(formAxe.longueursection,{'attr': {'placeholder':"Indiquer le nombre de position des sections de l'axe"}})}}
+
+    <button type="submit" class="btn btn-primary">Créer un axe</button>
+
+    {{form_end(formAxe)}}
+
+{%endblock%}

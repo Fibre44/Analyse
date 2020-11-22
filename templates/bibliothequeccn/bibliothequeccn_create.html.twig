@@ -1,0 +1,22 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une nouvelle Convention collective</h1>
+
+    {{form_start(formCcn)}}
+   
+    {{form_row(formCcn.idcc,{'attr': {'placeholder':"Indiquer le code idcc de la convention collective"}})}}
+    {{form_row(formCcn.libelle,{'attr': {'placeholder':"Indiquer le libellé de la convention collective"}})}}
+
+    {{form_widget(formCcn)}}
+
+    <button type="submit" class="btn btn-primary">Créer une Convention collective</button>
+
+    {{form_end(formCcn)}}
+
+
+
+
+{%endblock%}
+

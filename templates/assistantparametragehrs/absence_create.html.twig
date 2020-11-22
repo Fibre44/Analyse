@@ -1,0 +1,20 @@
+{% extends 'base_assistanteparametrage.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer une absence</strong>
+
+    {{form_start(formAbsence)}}
+   
+    {{form_widget(formAbsence)}}
+
+    <button type="submit" class="btn btn-primary">Créer un taux d'absence</button>
+
+    {{form_end(formAbsence)}}
+
+
+<a href="{{ path('assistantparametragerubrique_create', {'idprojet':projet.id,'idsociete':societe.id})}}" class="btn btn-primary">Ajour une rubrique</a>
+
+
+{%endblock%}
+

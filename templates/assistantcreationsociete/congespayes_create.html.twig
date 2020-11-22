@@ -1,0 +1,19 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer les CP</strong>
+
+    {{form_start(formCongespayes)}}
+    {{form_row(formCongespayes.type,{'attr': {'placeholder':"Indiquer le nom de votre banque"}}) }}
+    {{form_row(formCongespayes.finexercice,{'attr': {'placeholder':"Indiquer le nom de votre banque"}}) }}
+    {{form_row(formCongespayes.arrondi,{'attr': {'placeholder':"Indiquer le nom de votre banque"}}) }}
+    {{form_row(formCongespayes.arrondistc,{'attr': {'placeholder':"Indiquer le nom de votre banque"}}) }}
+    {{form_row(formCongespayes.reliquat,{'attr': {'placeholder':"Indiquer le nom de votre banque"}}) }}
+    {{form_row(formCongespayes.cpanciennete,{'attr': {'placeholder':"Facultatif indiquer la règle"}}) }}
+    {{form_row(formCongespayes.cpsupplementaire,{'attr': {'placeholder':"Facultatif indiquer la règle"}}) }}
+
+    <button type="submit" class="btn btn-primary">Créer les CP </button>
+    {{form_end(formCongespayes)}}
+
+{%endblock%}

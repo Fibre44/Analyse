@@ -1,0 +1,37 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+<p>Liste des codes emplois societe {{societe.raisonsociale}}
+
+<table class="emplois">
+   
+    <thead>
+        <tr>
+                
+            <th>Code emploi</th>
+            <th>Libellé emploi</th>
+        </tr>            
+        
+    </thead>
+        <tbody>
+
+            {%for emploi in societe.emplois %}
+                <tr>
+                   
+                    <td>{{emploi.codeemploi}}</td>
+                    <td>{{emploi.valeur}}</td>                                                  
+                </tr>
+            {%endfor%}
+
+           
+        </tbody>
+</table>
+
+
+
+<a class="nav-link" href="{{ path('assistantcreationsociete_emploi_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer les emplois</a>
+<a class="nav-link" href="{{ path('assistantcreationsociete_axe_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer les axes analytiques</a>
+
+
+{%endblock%}

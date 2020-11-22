@@ -1,0 +1,39 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une classification pour la convention {{ccn.libelle}}</h1>
+
+    {{form_start(formClassification)}}
+    {{form_row(formClassification.type,{'attr': {'placeholder':"Indiquer la valeur"}}) }}
+    {{form_row(formClassification.valeur,{'attr': {'placeholder':"Indiquer la valeur"}}) }}
+    <button type="submit" class="btn btn-primary">Créer une classification</button>
+
+    {{form_end(formClassification)}}
+
+<table class="classifications">
+    
+        <thead>
+            <tr>
+                    <th>Type</th>
+                    <th>Valeur</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for classification in ccn.classifications%}
+                
+                <tr>
+                    <td>{{classification.type}}</td>
+                    <td>{{classification.valeur}}</td>
+                
+                </tr>
+             {%endfor%}
+
+        </tbody>
+     </table>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_primeanciennetepopulation_create',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccn.id})}}">Créer une prime d'ancienneté</a>
+
+{%endblock%}

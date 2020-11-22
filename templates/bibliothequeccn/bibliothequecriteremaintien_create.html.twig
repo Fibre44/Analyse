@@ -1,0 +1,15 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer un critère de maintien</h1>
+
+    {{form_start(formCriteremaintien)}}
+    {{form_widget(formCriteremaintien)}}
+    <button type="submit" class="btn btn-primary">Créer un critère de maintien </button>
+
+    {{form_end(formCriteremaintien)}}
+
+
+
+{%endblock%}

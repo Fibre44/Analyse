@@ -1,0 +1,19 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer un taux taux AT</strong>
+
+    {{form_start(formTauxat)}}
+   
+    {{form_widget(formTauxat)}}
+
+    <button type="submit" class="btn btn-primary">Créer un taux d'absence</button>
+
+    {{form_end(formTauxat)}}
+
+
+<a href="{{ path('assistantcreationsociete_etablissement_create', {'idprojet':projet.id,'idsociete':societe.id})}}" class="btn btn-primary"">Créer un nouvel établissement</a>
+
+
+{%endblock%}

@@ -1,0 +1,14 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une CCN sur la societe : {{societe.raisonsociale}}</h1>
+
+    {{form_start(formCcn)}}
+    {{form_row(formCcn.idcc,{'attr': {'placeholder':"Indiquer le code IDCC de la CCN"}})}}
+    {{form_row(formCcn.libelle,{'attr': {'placeholder':"Indiquer le libellé de la CCN"}})}}
+    <button type="submit" class="btn btn-primary">Créer une CCN</button>
+
+    {{form_end(formCcn)}}
+
+{%endblock%}

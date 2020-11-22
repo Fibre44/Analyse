@@ -1,0 +1,21 @@
+{% extends 'base_assistanteparametrage.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer une liste déroulante libre</strong>
+
+    <p>HR Sprint donne la possibilité d'ajouter plusieurs zones libres </p>
+
+    {{form_start(formZonelibrehrs)}}
+   
+    {{form_widget(formZonelibrehrs)}}
+
+    <button type="submit" class="btn btn-primary">Créer une liste  déroulante libre</button>
+
+    {{form_end(formZonelibrehrs)}}
+
+<a href="{{ path('assistantparametragetauxabsence_create', {'idprojet':projet.id,'idsociete':societe.id})}}" class="btn btn-primary">Ajour une taux d'absence</a>
+
+
+
+{%endblock%}

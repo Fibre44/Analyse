@@ -1,0 +1,43 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{% block title %}Hello BibliothequeccnController!{% endblock %}
+
+{% block body %}
+
+ <p>Vous trouverez ci dessous la liste des CCN de la bibliotheque</p>
+
+
+ <table class="bibliothequeccn">
+    
+        <thead>
+            <tr>
+                
+                    <th>idcc</th>
+                    <th>Libellé</th>
+                    <th>Statut</th>
+                    <th>Voir ccn</th>
+                    <th>Proposer une modification</th>           
+            </tr>
+        
+        </thead>
+        <tbody>
+
+            {%for ccn in listeccn%}
+
+            <tr>
+                <td>{{ccn.idcc}}</td>
+                <td>{{ccn.libelle}}</td>
+                <td>{{ccn.statut}}</td>
+                <td><a href="{{ path('bibliothequeccn_show', {'idbibliothequeccn':ccn.id})}}" class="btn btn-primary">Voir la CCN</a></td>
+                <td><a href="{{ path('bibliothequeccn_show', {'idbibliothequeccn':ccn.id})}}" class="btn btn-primary">Proposer une modification</a></td>
+
+            </tr>
+
+          {%endfor%}
+             
+        </tbody>
+</table>
+
+
+
+{% endblock %}

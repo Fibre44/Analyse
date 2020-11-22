@@ -1,0 +1,19 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer un titre grille SMC</h1>
+
+    {{form_start(formSmcvaleur)}}
+
+    {{form_widget(formSmcvaleur)}}
+
+    <button type="submit" class="btn btn-primary">Créer un titre</button>
+
+    {{form_end(formSmcvaleur)}}
+
+
+
+
+{%endblock%}
+

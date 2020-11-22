@@ -1,0 +1,25 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Axe analytique en cours {{axe.libelle}}</h1>
+
+    {{form_start(formSection)}}
+    {{form_row(formSection.codesection,{'attr': {'placeholder':"Indiquer le code de la section analytique"}}) }}
+    {{form_row(formSection.libelle,{'attr': {'placeholder':"Indiquer le libellé de la section analytique"}}) }}
+
+    <button type="submit" class="btn btn-primary">Créer une section</button>
+
+    {{form_end(formSection)}}
+
+    {%for sections in axe.sections%}
+
+    <p>{{sections.codesection}} {{sections.libelle}}</p>
+
+    {%endfor%}
+
+    <a class="btn btn-primary" href="{{ path('assistantcreationsociete_axe_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Ajouter un axe analytique supplémentaires</a>
+    </br>
+    <a class="btn btn-primary" href="{{ path('assistantcreationsociete_calendrier_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer un calendrier</a>
+
+{%endblock%}

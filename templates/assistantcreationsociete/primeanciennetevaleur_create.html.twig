@@ -1,0 +1,44 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer les taux d'ancienneté pour la population : {{population.libelle}}</h1>
+
+    {{form_start(formPrimeanciennetevaleur)}}
+    {{form_widget(formPrimeanciennetevaleur)}}
+    <button type="submit" class="btn btn-primary">Créer le nouveau taux </button>
+
+    {{form_end(formPrimeanciennetevaleur)}}
+
+<table class="primeanciennete">
+    
+        <thead>
+            <tr>
+                    <th>Population</th>
+                    <th>Ancienneté en mois</th>
+                    <th>Signe</th>
+                    <th>Pourcentage</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+           {% for primeanciennetevaleur in population.primeanciennetevaleurs %}
+
+                <tr>
+                    <td>{{population.libelle}}</td>
+                    <td>{{primeanciennetevaleur.anciennetemois}}</td>
+                    <td>{{primeanciennetevaleur.signe}}</td>
+                    <td>{{primeanciennetevaleur.pourcentage}}</td>
+             
+                </tr>
+            {%endfor%}
+
+        </tbody>
+</table>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_primeanciennetepopulation_create',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccn.id})}}">Créer une nouvelle prime d'ancienneté</a>
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_emploi_create',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccn.id})}}">Créer un code emploi</a>
+
+
+{%endblock%}

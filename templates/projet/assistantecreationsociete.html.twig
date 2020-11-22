@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<article>
+
+    <h2>Analyse du projet : {{projet.titre}}</h2>
+
+    <p>Afin de compléter l'assistant suivant vous aurez besoin</p>
+
+    <ul>
+        <li>KBIS</li>
+        <li>Vos CCN</li>
+        <li>Vos RIB</li>
+    </ul>
+
+</article>
+
+    <a class="nav-link" href="{{ path('assistantcreationsociete_societe_create',{'idprojet':projet.id})}}">Ajouter une société avec l'assistant</a>
+
+{% endblock %}

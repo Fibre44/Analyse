@@ -1,0 +1,12 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <p>La convention collective idcc : {{ccn.idcc}} existe déjà vous pouvez la consulter<a href="{{ path('bibliothequeccn_show', {'idbibliothequeccn':ccn.id})}}" class="btn btn-primary">Voir la CCN</a></td>
+
+</p>
+
+{%endblock%}
+
+
+

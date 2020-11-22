@@ -1,0 +1,71 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+<p>Description de la convention collective {{ccnprojet.libelle}} numéro IDCC {{ccnprojet.idcc}}</p>
+
+<strong>Liste des classifications</strong>
+
+<table class="classifications">
+    
+        <thead>
+            <tr>
+                    <th>Type</th>
+                    <th>Valeur</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+            {% for classifications in ccnprojet.classifications%}
+                
+                <tr>
+                    <td>{{classifications.type}}</td>
+                    <td>{{classifications.valeur}}</td>
+                
+                </tr>
+             {%endfor%}
+
+        </tbody>
+</table>
+
+</br>
+
+<strong> Prime anciennete </strong>
+
+<table class="primeanciennete">
+    
+        <thead>
+            <tr>
+                    <th>Population</th>
+                    <th>Ancienneté en mois</th>
+                    <th>Signe</th>
+                    <th>Pourcentage</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+            {% for primeanciennetepopulation in ccnprojet.primeanciennetepopulations %}
+                {% for primeanciennetevaleur in primeanciennetepopulation.primeanciennetevaleurs %}
+
+                <tr>
+                    <td>{{primeanciennetepopulation.libelle}}</td>
+                    <td>{{primeanciennetevaleur.anciennetemois}}</td>
+                    <td>{{primeanciennetevaleur.signe}}</td>
+                     <td>{{primeanciennetevaleur.pourcentage}}</td>
+             
+                </tr>
+                {%endfor%}
+
+            {%endfor%}
+
+        </tbody>
+</table>
+
+
+
+
+    
+{%endblock%}
+

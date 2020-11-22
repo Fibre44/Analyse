@@ -1,0 +1,18 @@
+{% extends 'base_assistanteparametrage.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer une rubrique</strong>
+
+    {{form_start(formRubrique)}}
+   
+    {{form_widget(formRubrique)}}
+
+    <button type="submit" class="btn btn-primary">Créer une rubrique</button>
+
+    {{form_end(formRubrique)}}
+
+
+
+
+{%endblock%}

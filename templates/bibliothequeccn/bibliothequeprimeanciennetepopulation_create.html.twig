@@ -1,0 +1,19 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une nouvelle Prime d'ancienneté</h1>
+
+    {{form_start(formPrimeanciennetepopulation)}}
+
+    {{form_widget(formPrimeanciennetepopulation)}}
+
+    <button type="submit" class="btn btn-primary">Créer une prime d'ancienneté</button>
+
+    {{form_end(formPrimeanciennetepopulation)}}
+
+
+
+
+{%endblock%}
+

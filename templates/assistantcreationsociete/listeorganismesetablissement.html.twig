@@ -1,0 +1,36 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+<p>Etablissement en cours {{etablissement.libelle}}
+
+  <table class="organismes">
+    
+        <thead>
+            <tr>
+                    <th>Libelle</th>
+                    <th>nature</th>
+                    <th>adresse</th>
+                    <th>code postal</th>
+                    <th>ville</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+
+        {%for organismes in etablissement.organismes%}
+                <tr>
+                    <td>{{organismes.libelle}}</td>
+                    <td>{{organismes.nature}}</td>
+                    <td>{{organismes.adresse}}</td>
+                    <td>{{organismes.codepostal}}</td>
+                    <td>{{organismes.ville}}</td>
+              
+                </tr>
+            {%endfor%}
+
+        </tbody>
+     </table>
+<a href="{{ path('assistantcreationsociete_banque_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id})}}" class="btn btn-primary"">Créer un RIB</a>
+
+{%endblock%}

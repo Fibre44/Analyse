@@ -1,0 +1,105 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+<p>Description de la convention collective {{ccn.libelle}} numéro IDCC {{ccn.idcc}}</p>
+<p>Statut : {{ccn.statut}}</p>
+
+<p>Liste des coefficients</p>
+
+<table class="coefficients">
+    
+        <thead>
+            <tr>
+                <th>Nature</th>
+                <th>Valeur</th>
+                   
+            </tr>
+        
+        </thead>
+        <tbody>
+
+
+            {%for coefficients in ccn.bibliothequeclassifications%}
+
+                {%if coefficients.type=="Coefficient"%}
+
+                    <tr>
+                        <td>Coefficient</td>
+                        <td>{{coefficients.valeur}}</td>
+                    
+                    </tr>
+            
+                {%endif%}
+
+          {%endfor%}
+             
+        </tbody>
+</table>
+
+</br>
+
+<p>Liste des qualification</p>
+
+<table class="qualifications">
+    
+        <thead>
+            <tr>             
+                <th>Nature</th>
+                <th>Valeur</th>
+                   
+            </tr>
+        
+        </thead>
+        <tbody>
+
+
+            {%for qualifications in ccn.bibliothequeclassifications%}
+
+                {%if qualifications.type=="Qualification"%}
+
+                    <tr>
+                        <td>Qualifation</td>
+                        <td>{{qualifications.valeur}}</td>
+                    
+                    </tr>
+            
+                {%endif%}
+
+          {%endfor%}
+             
+        </tbody>
+</table>
+
+</br>
+
+<p>Maintien des salaires</p>
+
+<table class="qualifications">
+    
+        <thead>
+            <tr>             
+                <th>Absence</th>
+                <th>Population</th>
+                   
+            </tr>
+        
+        </thead>
+        <tbody>
+
+
+            {%for maintiens in ccn.bibliothequecriteremaintiens%}
+
+            <tr>
+                <td>{{maintiens.absence}}</td>
+                <td>{{maintiens.population}}</td>
+             
+            </tr>
+            
+          {%endfor%}
+             
+        </tbody>
+</table>
+
+{%endblock%}
+

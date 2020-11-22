@@ -1,0 +1,25 @@
+{% extends 'base_assistanteparametrage.html.twig' %}
+
+{%block body %}
+
+    <strong>Créer des valeurs pour {{zonelibre.libelle}} </strong>
+
+    {{form_start(formZonelibrehrsvaleur)}}
+   
+    {{form_widget(formZonelibrehrsvaleur)}}
+
+    <button type="submit" class="btn btn-primary">Créer une valeur</button>
+
+    {{form_end(formZonelibrehrsvaleur)}}
+
+{%for valeurs in zonelibre.valeurzonelibrehrs%}
+
+<p>{{valeurs.code}}/{{valeurs.valeur}}</p>
+
+{%endfor%}
+
+<a href="{{ path('assistantparametragehrszoneslibres_create', {'idprojet':projet.id,'idsociete':societe.id})}}" class="btn btn-primary">Ajour une autre liste déroulante</a>
+
+<a href="{{ path('assistantparametragetauxabsence_create', {'idprojet':projet.id,'idsociete':societe.id})}}" class="btn btn-primary">Ajour une taux d'absence</a>
+
+{%endblock%}

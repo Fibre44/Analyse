@@ -1,0 +1,20 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une nouvelle Prime d'ancienneté</h1>
+
+    {{form_start(formPrimeanciennetevaleur)}}
+
+    {{form_widget(formPrimeanciennetevaleur)}}
+
+    <button type="submit" class="btn btn-primary">Créer une prime d'ancienneté</button>
+
+    {{form_end(formPrimeanciennetevaleur)}}
+
+
+<a class="btn btn-primary" href="{{ path('bibliotheque_smcpopulation_create',{'idbibliothequeccn':bibliothequeccn.id})}}">Créer le smc</a>
+
+
+{%endblock%}
+

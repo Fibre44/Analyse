@@ -1,0 +1,39 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+<h1>Version de developpement se limite à l'affichage de la bibliotheque</h1>
+<p>Import du code IDCC {{ccnprojet.libelle}}/p>
+
+<table class="classifications">
+    
+        <thead>
+            <tr>
+                    <th>Numéro interne ccn</th>
+                    <th>Type</th>
+                    <th>Valeur</th>
+
+
+            </tr>
+        
+        </thead>
+        <tbody>
+
+                {%for classifications in ccnprojet.classifications%}
+                <tr>
+                    <td>{{classifications.type}}</td>
+                    <td>{{classifications.valeur}}</td>
+
+                
+                </tr>
+             {%endfor%}
+
+        </tbody>
+     </table>
+
+        
+<a href="{{ path('assistantcreationsociete_show_ccn', {'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id})}}" >Voir la bibliotheque projet</a>
+
+
+
+
+{%endblock%}
