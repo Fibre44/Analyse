@@ -1,9 +1,20 @@
 # Analyse
--Logiciel de création de cahier d'analyse
--Version de PHP requis : 7.4.12
--Version de composer : 62
--Version de Symfony : 5.1.5
--Pour installer l'application 
--Etape 1 git clone du repository
--Etape 2 lancer la commande composer install
--Etape 3 lancer les migrations
+
+# Objectifs : L'application Analyse à pour objectif de rédiger les cahiers d'analyses
+# Prérequis
+
+- Symfony 5.1,
+- PHP 7.4.12,
+- Composer 62
+- SGBD MariaDb
+
+# Procédure d'installation
+
+- Préparer votre environnement Symfony + LAMP
+- Dans le terminal lancer la commande git clone https://github.com/Fibre44/Analyse.git
+- Placer vous dans le répértoire puis renommer le fichier /env.dist en .env et éditer la configuration de MariaDb
+- Dans le terminal lancer la commande composer install
+- Dans le terminal lancer la commande php bin/console doctrine:migrations:migrate
+- Dans le terminal lancer la commande symfony server:start
+- Dans votre navigateur Web taper l'url http://localhost:8000/inscription
+
