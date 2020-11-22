@@ -66,6 +66,11 @@ class Projet
      */
     private $journalprojets;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $archive;
+
     public function __construct()
     {
         $this->societes = new ArrayCollection();
@@ -236,6 +241,18 @@ class Projet
                 $journalprojet->setProjet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArchive(): ?bool
+    {
+        return $this->archive;
+    }
+
+    public function setArchive(?bool $archive): self
+    {
+        $this->archive = $archive;
 
         return $this;
     }
