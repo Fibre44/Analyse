@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ConnexionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=ConnexionRepository::class)
+ * 
  */
 class Connexion
 {
@@ -32,6 +35,11 @@ class Connexion
      * @ORM\JoinColumn(nullable=false)
      */
     private $utilisateur;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -73,4 +81,6 @@ class Connexion
 
         return $this;
     }
+
+ 
 }

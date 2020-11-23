@@ -15,6 +15,34 @@
 
 </article>
 
-    <a class="nav-link" href="{{ path('assistantcreationsociete_societe_create',{'idprojet':projet.id})}}">Ajouter une société avec l'assistant</a>
+    <a class="btn btn-primary" href="{{ path('assistantcreationsociete_societe_create',{'idprojet':projet.id})}}">Ajouter une société avec l'assistant</a>
+
+ <table class="societes">
+    
+        <thead>
+            <tr>
+                
+                    <th>SIREN</th>
+                    <th>Raison sociale</th>
+                    <th>Lancer l'assistant</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+
+
+            {%for societes in projet.societes %}
+                <tr>
+                    <td>{{societes.siren}}</td>
+                    <td>{{societes.raisonsociale}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id,'idsociete':societes.id})}}">Reprendre la création</a></td>
+
+                </tr>
+            {%endfor%}
+
+           
+        </tbody>
+     </table>
+
 
 {% endblock %}

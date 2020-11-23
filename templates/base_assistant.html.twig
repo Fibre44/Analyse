@@ -15,124 +15,17 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-           <ul class="navbar-nav mr-auto">
-            
-                {% if  controller_name=="Assistant_créer_société" %}
-    
-                    <li class"nav-item">
-                        <a class="nav-link" href="">Créer une société</a>
-                    </li>
+           <ul class="navbar-nav mr-auto"> 
+            {%if controller_name != "Assistant_créer_société" %}
 
-                {% endif %}
-
-                {% if  controller_name=="Assistant_créer_ccn" %}
-   
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}} /</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Créer une CCN</a>
-                    </li>
-                {% endif %}
-                {% if  controller_name=="Assistant_créer_classifications" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">CCN : {{ccn.libelle}}</a>
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer une classification</a>
-                    </li>
-                {% endif %}        
-            {% if  controller_name=="Assistant_créer_populationprimeanciennete" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">CCN : {{ccn.libelle}}</a>
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer une population prime ancienneté</a>
-                    </li>
-                {% endif %}   
-            {% if  controller_name=="Assistant_créer_valeurprimeanciennete" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">CCN : {{ccn.libelle}}</a>
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Population : {{population.libelle}}</a>
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer la table d'ancienneté</a>
-                    </li>
-                {% endif %}   
-            {% if  controller_name=="Assistant_créer_emploi" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer un code emploi</a>
-                    </li>
-            {% endif %} 
-            {% if  controller_name=="Assistant_créer_axe" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe :</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer un axe analytique</a>
-                    </li>
-            {% endif %}    
-           {% if  controller_name=="Assistant_créer_section" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Axe analytique : {{axe.libelle}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer une section</a>
-                    </li>
-            {% endif %} 
-           {% if  controller_name=="Assistant_créer_calendrier" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer un calendrier</a>
-                    </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Retour à l'assistante : {{projet.titre}}</a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id,'idsociete':societe.id})}}">Retour au cahier d'analyse : {{societe.raisonsociale}}</a> 
+                </li>
             {% endif %}
-            {% if  controller_name=="Assistant_créer_horaire" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Calendrier : {{calendrier.titre}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer un calendrier</a>
-                    </li>
-            {% endif %} 
-            {% if  controller_name=="Assistant_créer_etablissement" %}
-    
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Societe : {{societe.raisonsociale}}</a> 
-                    </li>
-                    <li class"nav-item">
-                    <a class="nav-link" href="">Etape créer un etablissement</a>
-                    </li>
-            {% endif %}   
+
             {% if not app.user%}
    
                 <li class"nav-item">

@@ -1,0 +1,45 @@
+{% extends 'base_assistant.html.twig' %}
+
+{% block title %}Accueil de l'assistant {% endblock %}
+
+{% block body %}
+
+<strong>Chapitre création de la CCN</strong>
+
+<p>Le logiciel propose une bibliotheque de CCN si votre CCN existe dans la bibliotheque elles sera importé. Dans le cas contraire vous devrez la créer<p>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_ccn_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Création d'une CCN</a></br>
+
+<strong>Liste des CCN du projet</strong></br>
+
+ <table class="ccn">
+    
+        <thead>
+            <tr>
+                
+                    <th>Idcc</th>
+                    <th>Libelle</th>
+                    <th>Voir la CCN</th>
+             </tr>
+        
+        </thead>
+        <tbody>
+
+
+            {%for ccn in societe.conventioncollectives %}
+                <tr>
+                    <td>{{ccn.idcc}}</td>
+                    <td>{{ccn.libelle}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_show_ccn',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccn.id})}}">Consulter la CCN</a></td>
+                    
+                </tr>
+            {%endfor%}
+
+            <tfoot>
+             
+            </tfoot>
+            
+        </tbody>
+     </table>
+
+{% endblock %}

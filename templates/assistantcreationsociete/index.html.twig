@@ -1,20 +1,56 @@
 {% extends 'base_assistant.html.twig' %}
 
-{% block title %}Hello AssistantcreationsocieteController!{% endblock %}
+{% block title %}Accueil de l'assistant {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<p>L'assistant se compose de plusieurs chapitres que vous devez compléter pour réaliser l'analyse</p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/ndenis/Documents/Git/Projets_analyses/src/Controller/AssistantcreationsocieteController.php'|file_link(0) }}">src/Controller/AssistantcreationsocieteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/ndenis/Documents/Git/Projets_analyses/templates/assistantcreationsociete/index.html.twig'|file_link(0) }}">templates/assistantcreationsociete/index.html.twig</a></code></li>
-    </ul>
-</div>
+<strong>Chapitre création de la CCN</strong>
+
+<p>Pour compléter ce chapitre vous aurez besoin</p>
+
+ <ul>
+        <li>Vos classifications</li>
+        <li>Vos tables d'ancienneté</li>
+        <li>Vos grilles des maintiens des salaires</li>
+</ul>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_chapitreccn',{'idprojet':projet.id,'idsociete':societe.id})}}">Lancer le chapitre : Création CCN</a></br>
+
+
+<strong>Chapitre création des codes emplois</strong>
+
+<p>Pour compléter ce chapitre vous aurez besoin</p>
+
+ <ul>
+        <li>Liste de vos codes emplois</li>
+</ul>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_emploi_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Lancer le chapitre : Création des codes emplois</a></br>
+
+<strong>Chapitre création du paramétrage analytique</strong>
+
+<p>Pour compléter ce chapitre vous aurez besoin</p>
+
+ <ul>
+        <li>De votre paramétrage analytique</li>
+</ul>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_axe_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Lancer le chapitre : Création des axes analytiques</a></br>
+
+<strong>Chapitre création des établissements</strong>
+
+<p>Pour compléter ce chapitre vous aurez besoin</p>
+
+ <ul>
+        <li>Liste de vos établissements</li>
+        <li>Liste de vos banques</li>
+        <li>Liste de vos organismes</li>
+        <li>Liste de vos règles de CP</li>
+
+
+</ul>
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Lancer le chapitre : Création d'un établissement</a></br>
 {% endblock %}

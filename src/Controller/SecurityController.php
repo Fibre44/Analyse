@@ -58,6 +58,7 @@ class SecurityController extends AbstractController
 
     public function login(){
         return $this->render('security/login.html.twig');
+
     }
 
     /**
@@ -78,7 +79,6 @@ class SecurityController extends AbstractController
         $connexion = new Connexion;
 
         $connexion->setEtape('Deconnexion');
-        $connexion->setDate(new \DateTime('now'));
         $entityManager->persist($connexion);
         $utilisteuractif->addConnexion($connexion);
         $entityManager->flush();    

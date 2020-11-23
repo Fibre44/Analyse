@@ -63,7 +63,7 @@ class AssistantcreationsocieteController extends AbstractController
     
     /**
      * @Route("/assistantcreationsociete/projet/{idprojet}/societe/new", name="assistantcreationsociete_societe_create")
-     */
+    */
     public function addsociete(Request $request,ProjetRepository $repo,$idprojet){
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -81,7 +81,7 @@ class AssistantcreationsocieteController extends AbstractController
             $entityManager->persist($societe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('assistantcreationsociete_ccn_create', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId()]);
+            return $this->redirectToRoute('assistantcreationsociete_index', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId()]);
         }
         return $this->render('assistantcreationsociete/societe_create.html.twig',[
             'formSociete'=>$form->createView(),
@@ -91,6 +91,43 @@ class AssistantcreationsocieteController extends AbstractController
 
     }
 
+     /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/index", name="assistantcreationsociete_index")
+     */
+    public function index(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+
+        return $this->render('assistantcreationsociete/index.html.twig',[
+            
+            'projet'=>$projet,
+            'societe'=>$societe,
+            'controller_name' => 'Assistant_index',
+
+        ]);
+
+    }
+
+     /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/index/chapitreccn", name="assistantcreationsociete_chapitreccn")
+     */
+    public function chapitreccn(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+
+        return $this->render('assistantcreationsociete/chapitreccn.html.twig',[
+            
+            'projet'=>$projet,
+            'societe'=>$societe,
+            'controller_name' => 'Assistant_chapitre_ccn',
+
+        ]);
+
+    }
      /**
      * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/ccn/new", name="assistantcreationsociete_ccn_create")
      */

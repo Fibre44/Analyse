@@ -25,7 +25,7 @@ use App\Entity\Connexion;
 class ProjetController extends AbstractController
 {
     /**
-     * @Route("/", name="projets")
+     * @Route("/accueil", name="accueil")
      */
     public function index(ProjetRepository $repoprojet,UtilisateurRepository $repoutilisateur)
     {
@@ -40,7 +40,6 @@ class ProjetController extends AbstractController
         $connexion = new Connexion;
 
         $connexion->setEtape('Connexion');
-        $connexion->setDate(new \DateTime('now'));
         $entityManager->persist($connexion);
         $utilisteuractif->addConnexion($connexion);
         $entityManager->flush();
@@ -186,16 +185,13 @@ class ProjetController extends AbstractController
     */
 
 
-    public function creationsociete(ProjetRepository $repo,$idprojet){
+    public function assistantesociete(ProjetRepository $repo,$idprojet){
 
         $projet = $repo->find($idprojet);
-        $societes = $projet->getSocietes();
         
-        $totalsociete=0;
         
         return $this->render('projet/assistantecreationsociete.html.twig',[
             'projet'=>$projet,
-            'totalsociete'=>$totalsociete
 
         ]);
     }
