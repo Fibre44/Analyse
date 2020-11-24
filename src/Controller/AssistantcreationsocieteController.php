@@ -621,8 +621,8 @@ class AssistantcreationsocieteController extends AbstractController
 
         }
         return $this->render('assistantcreationsociete/axe_create.html.twig',[
-            'projet' => $projet->getId(),
-            'societe'=>$societe->getId(),
+            'societe'=>$societe,
+            'projet'=>$projet,
             'formAxe'=>$form->createView(),
             'controller_name' => 'Assistant_créer_axe'
 
@@ -774,5 +774,44 @@ class AssistantcreationsocieteController extends AbstractController
         ]);    
     }
 
+    /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/ccn/{idccn}/classification/{idclassification}", name="assistantcreationsociete_remove_classification")
+    */
 
+    public function removeclassification (Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,ConventioncollectiveRepository $repoccn,$idccn,ClassificationRepository $repoclassification,$idclassification){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repoprojet->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+        $ccn = $repoccn->find($idccn);    
+        $classification = $repoclassification->find($idclassification);
+        $ccn->removeClassification($classification);
+        $entityManager->persist($classification);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('assistantcreationsociete_show_ccn', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId()]);
+        }
+
+    /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/ccn/{idccn}/classification/{idclassification}", name="assistantcreationsociete_edit_classification")
+    */
+
+    public function editclassification (Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,ConventioncollectiveRepository $repoccn,$idccn,ClassificationRepository $repoclassification,$idclassification){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repoprojet->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+        $ccn = $repoccn->find($idccn);    
+        $classification = $repoclassification->find($idclassification);
+        
+        $ccn->removeClassification($classification);
+        $entityManager->persist($classification);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('assistantcreationsociete_show_ccn', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId()]);
+        }
+
+     
 }

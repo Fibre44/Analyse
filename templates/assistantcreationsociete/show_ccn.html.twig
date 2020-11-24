@@ -12,7 +12,6 @@
             <tr>
                     <th>Type</th>
                     <th>Valeur</th>
-
             </tr>
         
         </thead>
@@ -21,6 +20,8 @@
                 <tr>
                     <td>{{classification.type}}</td>
                     <td>{{classification.valeur}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_remove_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id,'idclassification':classification.id,})}}">Editer la classification</a></td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_remove_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id,'idclassification':classification.id,})}}">Supprimer la classification</a></td>
 
                 
                 </tr>

@@ -24,6 +24,17 @@ use App\Entity\Connexion;
 
 class ProjetController extends AbstractController
 {
+
+    /**
+     * @Route("/", name="racine")
+     */
+
+
+    public function racine()
+    {
+    return $this->redirectToRoute('accueil');
+
+    }
     /**
      * @Route("/accueil", name="accueil")
      */
@@ -69,12 +80,9 @@ class ProjetController extends AbstractController
         $utilisateur=new Utilisateur();
         $utilisateur = $repoutilisateur->findby([
             'email'=>$this->getUser()->getUsername()]);//on récupére l'email pour fabriquer l'utilisateur
-
-       if(!$projet){
-
-            $projet= new Projet();
-        }
-        
+            
+       $projet= new Projet();
+                
         $form = $this->createForm(ProjetType::class,$projet);
 
         $form->handleRequest($request);
