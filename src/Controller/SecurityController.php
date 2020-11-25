@@ -86,4 +86,27 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('security_logout');
  
     }
+
+    /**
+     * @Route("/registration/connexion/new",name="security_addconnexion")
+    */
+
+    public function addconnexion(UtilisateurRepository $repoutilisateur){
+        
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $utilisateur=$this->getUser()->getUsername();
+        $utilisteuractif=$repoutilisateur->findOneBy(['email'=>$utilisateur]);
+
+        $connexion = new Connexion;
+
+        $connexion->setEtape('Connexion');
+        $entityManager->persist($connexion);
+        $utilisteuractif->addConnexion($connexion);
+        $entityManager->flush();
+   
+        return $this->redirectToRoute('accueil');
+
+
+    }
 }

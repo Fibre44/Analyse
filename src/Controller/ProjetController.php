@@ -17,9 +17,6 @@ use App\Form\ProjetType;
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use App\Form\RegistrationType;
-use App\Entity\Connexion;
-
-
  
 
 class ProjetController extends AbstractController
@@ -48,12 +45,6 @@ class ProjetController extends AbstractController
         $utilisateur=$this->getUser()->getUsername();
         $utilisteuractif=$repoutilisateur->findOneBy(['email'=>$utilisateur]);
 
-        $connexion = new Connexion;
-
-        $connexion->setEtape('Connexion');
-        $entityManager->persist($connexion);
-        $utilisteuractif->addConnexion($connexion);
-        $entityManager->flush();
         
         foreach ($projets as $totalitem)//Si le nbre de projet est à 0 alors on affichera créer un projet
         {
