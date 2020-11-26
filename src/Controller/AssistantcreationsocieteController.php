@@ -262,7 +262,7 @@ class AssistantcreationsocieteController extends AbstractController
             'societe'=>$societe,
             'projet'=>$projet,
             'ccnprojet'=>$ccnprojet,
-            'controller_name' => 'Assistant_voir_classifications',
+            'controller_name' => 'Assistant_show_ccn',
 
         ]);    
     }
@@ -408,7 +408,7 @@ class AssistantcreationsocieteController extends AbstractController
             'societe'=>$societe,
             'projet'=>$projet,
             'formEmploi'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_emploi'
+            'controller_name' => 'Assistant_add_emploi'
 
         ]);    
 
@@ -465,7 +465,7 @@ class AssistantcreationsocieteController extends AbstractController
             'societe'=>$societe,
             'projet'=>$projet,
             'formEtablissement'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_etablissement'
+            'controller_name' => 'Assistant_add_etablissement'
 
         ]);    
     }
@@ -493,13 +493,14 @@ class AssistantcreationsocieteController extends AbstractController
             $entityManager->persist($congespayes);
             $entityManager->flush();
 
-            return $this->redirectToRoute('assistantcreationsociete_organisme_show', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId()]);
+            return $this->redirectToRoute('assistantcreationsociete_organisme', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId(),'nature'=>'URSSAF']);
         }
         return $this->render('assistantcreationsociete/congespayes_create.html.twig',[
             'societe'=>$societe,
             'projet'=>$projet,
+            'etablissement'=>$etablissement,
             'formCongespayes'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_cp'
+            'controller_name' => 'Assistant_add_cp'
 
         ]);  
 
@@ -507,14 +508,14 @@ class AssistantcreationsocieteController extends AbstractController
 
 
     /**
-     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/annuaireorganisme", name="assistantcreationsociete_organisme_show")
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/{nature}/new", name="assistantcreationsociete_organisme")
     */
 
-     public function showannuaireorganisme(ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,OrganismeRepository $repoorganisme,EtablissementRepository $repoetablissement,$idetablissement){
+     public function showannuaireorganisme(ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,OrganismeRepository $repoorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
         
         $entityManager = $this->getDoctrine()->getManager();
 
-        $annuaireorganismes=$repoorganisme->findAll();
+        $annuaireorganismes=$repoorganisme->findBy(['nature'=>$nature]);
         $projet = $repoprojet->find($idprojet);
         $societe = $reposociete->find($idsociete);
         $etablissement = $repoetablissement->find($idetablissement);
@@ -525,16 +526,17 @@ class AssistantcreationsocieteController extends AbstractController
             'societe'=>$societe,
             'projet'=>$projet,
             'etablissement'=>$etablissement,
-            'controller_name' => 'Assistant_créer_affectationorganisme'
+            'nature'=>$nature,
+            'controller_name' => 'Assistant_add_organisme'
 
         ]);
      }
 
     /**
-     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/organisme/{idorganisme}/affecterorganisme", name="assistantcreationsociete_organisme_create")
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/organisme/{idorganisme}/affecterorganisme/{nature}", name="assistantcreationsociete_organisme_create")
      */
 
-     public function affecterorganisme(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,OrganismeRepository $repoorganisme,$idorganisme,EtablissementRepository $repoetablissement,$idetablissement){
+     public function affecterorganisme(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,OrganismeRepository $repoorganisme,$idorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
        
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -549,14 +551,13 @@ class AssistantcreationsocieteController extends AbstractController
 
         $entityManager->flush();
 
-        
+        if ($organisme->getnature()=="Mutuelle"){
+            return $this->redirectToRoute('assistantcreationsociete_banque_create', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement' =>$etablissement->getId()]);
 
-        return $this->render('assistantcreationsociete/listeorganismesetablissement.html.twig', ['controller_name' => 'ProjetController',
-            'societe'=>$societe,
-            'projet'=>$projet,
-            'etablissement'=>$etablissement
-        ]);
-
+        }
+        else{
+            return $this->redirectToRoute('assistantcreationsociete_organisme', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId(),'nature'=>$nature]);
+        }
      }
 
     /**
@@ -591,7 +592,7 @@ class AssistantcreationsocieteController extends AbstractController
             'projet'=>$projet,
             'etablissement'=>$etablissement,
             'formBanque'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_banque'
+            'controller_name' => 'Assistant_add_banque'
 
         ]);    
     }
@@ -624,7 +625,7 @@ class AssistantcreationsocieteController extends AbstractController
             'societe'=>$societe,
             'projet'=>$projet,
             'formAxe'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_axe'
+            'controller_name' => 'Assistant_add_axe'
 
         ]);
 
@@ -659,7 +660,7 @@ class AssistantcreationsocieteController extends AbstractController
             'projet'=>$projet,
             'axe'=>$axe,
             'formSection'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_section'
+            'controller_name' => 'Assistant_add_section'
 
         ]);
 
@@ -769,7 +770,7 @@ class AssistantcreationsocieteController extends AbstractController
             'projet'=>$projet,
             'etablissement'=>$etablissement,
             'formTauxat'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_tauxat'
+            'controller_name' => 'Assistant_add_tauxat'
 
         ]);    
     }

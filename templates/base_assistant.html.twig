@@ -16,22 +16,140 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
            <ul class="navbar-nav mr-auto"> 
-            {%if controller_name != "Assistant_créer_société" %}
+
+            {%if controller_name == "Assistant_créer_société" %}
+
+            {% endif %}
+            {%if controller_name == "Assistant_index" %}
 
                 <li class"nav-item">
-                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Retour à l'accueil du projet</a> 
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}}</a> 
                 </li>
-                <li class"nav-item">
-                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id,'idsociete':societe.id})}}">Retour au cahier d'analyse : {{societe.raisonsociale}}</a> 
-                </li>
+               
             {% endif %}
 
+            {%if controller_name == "Assistant_chapitre_ccn" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}}</a> 
+                </li>
+              
+            {% endif %}
+
+            {%if controller_name == "Assistant_show_ccn" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_show_ccn',{'idprojet':projet.id, 'idsociete':societe.id, 'idccn':ccnprojet.id})}}">CCN {{ccnprojet.libelle}}</a> 
+                </li>             
+            {% endif %}
+            {%if controller_name == "Assistant_add_emploi" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_emploi_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Ajouter un code emploi</a> 
+                </li>             
+            {% endif %}
+            {%if controller_name == "Assistant_add_axe" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_axe_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Ajouter un un axe analytique</a> 
+                </li>             
+            {% endif %}
+            {%if controller_name == "Assistant_add_section" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_axe_create',{'idprojet':projet.id, 'idsociete':societe.id, 'idaxe':axe.id})}}">Axe {{axe.libelle}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_section_create',{'idprojet':projet.id, 'idsociete':societe.id, 'idaxe':axe.id})}}">Ajouter une section </a> 
+                </li>              
+            {% endif %}
+            {%if controller_name == "Assistant_add_etablissement" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Ajouter un établissement</a> 
+                </li>
+             
+            {% endif %}
+            {%if controller_name == "Assistant_add_cp" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Etablissement {{etablissement.libelle}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_congespayes_create',{'idprojet':projet.id, 'idsociete':societe.id, 'idetablissement':etablissement.id})}}">Configurer les CP</a> 
+                </li>            
+            {% endif %}
+            {%if controller_name == "Assistant_add_organisme" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Etablissement {{etablissement.libelle}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_organisme',{'idprojet':projet.id, 'idsociete':societe.id, 'idetablissement':etablissement.id, 'nature':nature})}}">Selectionner {{nature}}</a> 
+                </li>            
+            {% endif %}
+            {%if controller_name == "Assistant_add_banque" %}
+
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Projet {{projet.titre}} > </a>
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id, 'idsociete':societe.id})}}">Societe {{societe.raisonsociale}} > </a> 
+                </li>
+                <li class"nav-item">
+                <a class="nav-link" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Etablissement {{etablissement.libelle}} > </a> 
+                </li>
+        
+            {% endif %}
             {% if not app.user%}
    
-                <li class"nav-item">
-                    <a href="{{ path('security_login')}}" class="nav-link">
-                    Connexion
-                    </a>
+            <li class"nav-item">
+                    <a href="{{ path('security_login')}}" class="nav-link">Connexion</a>
             </li>
 
             {% else %}

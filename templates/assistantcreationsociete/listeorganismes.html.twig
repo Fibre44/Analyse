@@ -27,9 +27,18 @@
                     <td>{{organismes.adresse}}</td>
                     <td>{{organismes.codepostal}}</td>
                     <td>{{organismes.ville}}</td>
-                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id})}}"class="btn btn-primary"" >Selectionner l'oganisme</a></td>
-
-                  
+                    {% if nature=="URSSAF" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'nature':"Retraite"})}}"class="btn btn-primary"" >Selectionner votre URSSAF</a></td>
+                    {% endif %}
+                    {% if nature=="Retraite" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'nature':"Prevoyance"})}}"class="btn btn-primary"" >Selectionner votre caisse de retraite</a></td>
+                    {% endif %}
+                    {% if nature=="Prevoyance" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'nature':"Mutuelle"})}}"class="btn btn-primary"" >Selectionner votre caisse de prévoyance</a></td>
+                    {% endif %}
+                    {% if nature=="Mutuelle" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'nature':"Mutuelle"})}}"class="btn btn-primary"" >Selectionner votre caisse de mutuelle</a></td>
+                    {% endif %}                         
                 </tr>
             {%endfor%}
         </tbody>
