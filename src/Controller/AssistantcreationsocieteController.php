@@ -23,11 +23,13 @@ use App\Entity\Primeanciennetepopulation;
 use App\Entity\Primeanciennetevaleur;
 use App\Entity\Congepaye;
 use App\Entity\Tauxat;
+use App\Entity\Organisme;
 
 
 use App\Repository\ProjetRepository;
 use App\Repository\SocieteRepository;
 use App\Repository\OrganismeRepository;
+use App\Repository\AnnuaireorganismeRepository;
 use App\Repository\EtablissementRepository;
 use App\Repository\BanqueRepository;
 use App\Repository\ConventioncollectiveRepository;
@@ -511,16 +513,16 @@ class AssistantcreationsocieteController extends AbstractController
      * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/{nature}/new", name="assistantcreationsociete_organisme")
     */
 
-     public function showannuaireorganisme(ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,OrganismeRepository $repoorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
+     public function showannuaireorganisme(ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,AnnuaireorganismeRepository $repoannuaireorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
         
         $entityManager = $this->getDoctrine()->getManager();
 
-        $annuaireorganismes=$repoorganisme->findBy(['nature'=>$nature]);
+        $annuaireorganismes=$repoannuaireorganisme->findBy(['type'=>$nature]);
         $projet = $repoprojet->find($idprojet);
         $societe = $reposociete->find($idsociete);
         $etablissement = $repoetablissement->find($idetablissement);
 
-        return $this->render('assistantcreationsociete/listeorganismes.html.twig', [
+        return $this->render('assistantcreationsociete/show_annuaireorganismes.html.twig', [
             'controller_name' => 'ProjetController',
             'annuaireorganismes'=>$annuaireorganismes,
             'societe'=>$societe,
@@ -533,25 +535,32 @@ class AssistantcreationsocieteController extends AbstractController
      }
 
     /**
-     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/organisme/{idorganisme}/affecterorganisme/{nature}", name="assistantcreationsociete_organisme_create")
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/annuaireorganisme/{idorganisme}/affecterorganisme/{nature}", name="assistantcreationsociete_organisme_create")
      */
 
-     public function affecterorganisme(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,OrganismeRepository $repoorganisme,$idorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
+     public function affecterorganisme(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,AnnuaireorganismeRepository $repoannuaireorganisme,$idorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
        
         $entityManager = $this->getDoctrine()->getManager();
 
-        $organisme=$repoorganisme->find($idorganisme);
+        $annuaireorganisme=$repoannuaireorganisme->find($idorganisme);
         $projet = $repoprojet->find($idprojet);
         $societe = $reposociete->find($idsociete);
         $etablissement = $repoetablissement->find($idetablissement);
 
-        $organisme->addEtablissement($etablissement);
+        $organisme = new Organisme;
+
+        $organisme->setLibelle($annuaireorganisme->getLibelle());
+        $organisme->setType($annuaireorganisme->getType());
+        $organisme->setAdresse($annuaireorganisme->getAdresse());
+        $organisme->setcodepostal($annuaireorganisme->getcodepostal());
+        $organisme->setville($annuaireorganisme->getville());
+        $organisme->settypepaiement("En attente");
+        $etablissement->addOrganisme($organisme);
         $entityManager->persist($organisme);
-        $entityManager->persist($etablissement);
 
         $entityManager->flush();
 
-        if ($organisme->getnature()=="Mutuelle"){
+        if ($organisme->getType()=="Mutuelle"){
             return $this->redirectToRoute('assistantcreationsociete_banque_create', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement' =>$etablissement->getId()]);
 
         }

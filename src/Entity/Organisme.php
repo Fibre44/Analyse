@@ -27,11 +27,6 @@ class Organisme
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nature;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $adresse;
 
     /**
@@ -49,14 +44,22 @@ class Organisme
      */
     private $typepaiement;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Etablissement::class, mappedBy="organismes")
-     */
+   
     private $etablissements;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Etablissement::class, inversedBy="organismes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etablissement;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
 
     public function __construct()
     {
-        $this->etablissements = new ArrayCollection();
     }
 
 
@@ -78,18 +81,7 @@ class Organisme
         return $this;
     }
 
-    public function getNature(): ?string
-    {
-        return $this->nature;
-    }
-
-    public function setNature(string $nature): self
-    {
-        $this->nature = $nature;
-
-        return $this;
-    }
-
+ 
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -137,34 +129,31 @@ class Organisme
 
         return $this;
     }
+
+    public function getEtablissement(): ?Etablissement
+    {
+        return $this->etablissement;
+    }
+
+    public function setEtablissement(?Etablissement $etablissement): self
+    {
+        $this->etablissement = $etablissement;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
  
-    /**
-     * @return Collection|Etablissement[]
-     */
-    public function getEtablissements(): Collection
-    {
-        return $this->etablissements;
-    }
-
-    public function addEtablissement(Etablissement $etablissement): self
-    {
-        if (!$this->etablissements->contains($etablissement)) {
-            $this->etablissements[] = $etablissement;
-            $etablissement->addOrganisme($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtablissement(Etablissement $etablissement): self
-    {
-        if ($this->etablissements->contains($etablissement)) {
-            $this->etablissements->removeElement($etablissement);
-            $etablissement->removeOrganisme($this);
-        }
-
-        return $this;
-    }
-
+  
    
 }

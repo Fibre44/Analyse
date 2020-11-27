@@ -51,11 +51,6 @@ class Etablissement
     private $societe;
 
     /**
-     * @ORM\OneToOne(targetEntity=Congepaye::class, mappedBy="etablissement", cascade={"persist", "remove"})
-     */
-    private $congepaye;
-
-    /**
      * @ORM\OneToMany(targetEntity=Banque::class, mappedBy="etablissements")
      */
     private $banques;
@@ -65,10 +60,6 @@ class Etablissement
      */
     private $tauxats;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Organisme::class, inversedBy="etablissements")
-     */
-    private $organismes;
 
     /**
      * @ORM\Column(type="string", length=9)
@@ -81,17 +72,21 @@ class Etablissement
     private $nic;
 
     /**
+     * @ORM\OneToMany(targetEntity=Organisme::class, mappedBy="etablissement", orphanRemoval=true)
+     */
+    private $organismes;
+
+    /**
      * @ORM\OneToMany(targetEntity=Congepaye::class, mappedBy="etablissement", orphanRemoval=true)
      */
     private $congepayes;
 
-   
+  
     public function __construct()
     {
-        $this->organismes = new ArrayCollection();
-        $this->Organismes = new ArrayCollection();
         $this->banques = new ArrayCollection();
         $this->tauxats = new ArrayCollection();
+        $this->organismes = new ArrayCollection();
         $this->congepayes = new ArrayCollection();
     }
 
@@ -172,38 +167,7 @@ class Etablissement
         return $this;
     }
 
-    /**
-     * @return Collection|Organisme[]
-     */
-    public function getOrganismes(): Collection
-    {
-        return $this->organismes;
-    }
-
-    public function addOrganisme(Organisme $organisme): self
-    {
-        if (!$this->organismes->contains($organisme)) {
-            $this->organismes[] = $organisme;
-            $organisme->addEtablissement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrganisme(Organisme $organisme): self
-    {
-        if ($this->organismes->contains($organisme)) {
-            $this->organismes->removeElement($organisme);
-            // set the owning side to null (unless already changed)
-            if ($organisme->getEtablissement() === $this) {
-                $organisme->setEtablissement(null);
-            }
-        }
-
-        return $this;
-    }
-
- 
+  
     /**
      * @return Collection|Banque[]
      */
@@ -291,6 +255,36 @@ class Etablissement
     }
 
     /**
+     * @return Collection|Organisme[]
+     */
+    public function getOrganismes(): Collection
+    {
+        return $this->organismes;
+    }
+
+    public function addOrganisme(Organisme $organisme): self
+    {
+        if (!$this->organismes->contains($organisme)) {
+            $this->organismes[] = $organisme;
+            $organisme->setEtablissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganisme(Organisme $organisme): self
+    {
+        if ($this->organismes->removeElement($organisme)) {
+            // set the owning side to null (unless already changed)
+            if ($organisme->getEtablissement() === $this) {
+                $organisme->setEtablissement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection|Congepaye[]
      */
     public function getCongepayes(): Collection
@@ -310,8 +304,7 @@ class Etablissement
 
     public function removeCongepaye(Congepaye $congepaye): self
     {
-        if ($this->congepayes->contains($congepaye)) {
-            $this->congepayes->removeElement($congepaye);
+        if ($this->congepayes->removeElement($congepaye)) {
             // set the owning side to null (unless already changed)
             if ($congepaye->getEtablissement() === $this) {
                 $congepaye->setEtablissement(null);

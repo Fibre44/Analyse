@@ -17,6 +17,7 @@ use App\Entity\Bibliothequesmcpopulation;
 use App\Entity\Utilisateur;
 use App\Entity\Projet;
 use App\Entity\Conventioncollective;
+use App\Entity\Annuaireorganisme;
 
 use App\Repository\BibliothequeccnRepository;
 use App\Repository\BibliothequeclassificationRepository;
@@ -37,6 +38,7 @@ use App\Form\BibliothequeprimeanciennetepopulationType;
 use App\Form\BibliothequeprimeanciennetevaleurType;
 use App\Form\BibliothequesmcvaleurType;
 use App\Form\BibliothequesmcpopulationType;
+use App\Form\AnnuaireorganismeType;
 
 
 
@@ -411,5 +413,35 @@ class BibliothequeccnController extends AbstractController
         }
 
     }
+    /**
+     * @Route("/annuaire/organisme/new", name="annuaireorganisme_create")
+    */
 
+    public function addannuaireorganisme(Request $request){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $organisme = new Annuaireorganisme();
+
+        $form = $this->createForm(AnnuaireorganismeType::class, $organisme);
+
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+                    
+            $entityManager->persist($organisme);
+            
+            $entityManager->flush();
+
+            return $this->redirectToRoute('annuaireorganisme_create', []);
+        }
+        return $this->render('bibliothequeccn/annuaireorganisme_create.html.twig',[
+            'controller_name' => 'bibliotheque_add_annuaire_organisme',
+            'formAnnuaireorganisme'=>$form->createView()
+
+        ]);
+
+    }
+    
 }
