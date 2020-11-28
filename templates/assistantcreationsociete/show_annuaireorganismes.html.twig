@@ -1,0 +1,50 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+<p>Etablissement en cours {{etablissement.libelle}}
+
+  <table class="annuaireorganismes">
+    
+        <thead>
+            <tr>
+                    <th>Id</th>
+                    <th>Libelle</th>
+                    <th>nature</th>
+                    <th>adresse</th>
+                    <th>code postal</th>
+                    <th>ville</th>
+                    <th>affecter l'établissement</th>
+
+            </tr>
+        
+        </thead>
+        <tbody>
+
+            {%for organismes in annuaireorganismes %}
+                <tr>
+                    <td>{{organismes.id}}</td>               
+                    <td>{{organismes.libelle}}</td>
+                    <td>{{organismes.type}}</td>
+                    <td>{{organismes.adresse}}</td>
+                    <td>{{organismes.codepostal}}</td>
+                    <td>{{organismes.ville}}</td>
+                    {% if typeorganisme=="URSSAF" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'typeorganisme':"Retraite"})}}"class="btn btn-primary"" >Selectionner votre URSSAF</a></td>
+                    {% endif %}
+                    {% if typeorganisme=="Retraite" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'typeorganisme':"Prevoyance"})}}"class="btn btn-primary"" >Selectionner votre caisse de retraite</a></td>
+                    {% endif %}
+                    {% if typeorganisme=="Prevoyance" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'typeorganisme':"Mutuelle"})}}"class="btn btn-primary"" >Selectionner votre caisse de prévoyance</a></td>
+                    {% endif %}
+                    {% if typeorganisme=="Mutuelle" %}
+                    <td><a href="{{ path('assistantcreationsociete_organisme_create', {'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id,'idorganisme':organismes.id, 'typeorganisme':"Mutuelle"})}}"class="btn btn-primary"" >Selectionner votre caisse de mutuelle</a></td>
+                    {% endif %}                         
+                </tr>
+            {%endfor%}
+        </tbody>
+     </table>
+
+ 
+{%endblock%}

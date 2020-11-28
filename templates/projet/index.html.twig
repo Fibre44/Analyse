@@ -16,10 +16,7 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-            
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('accueil')}}">Vos projets</a>
-            </li>
+       
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('projet_create')}}">Créer un projet</a>
             </li>
@@ -73,7 +70,7 @@
                     <td>{{projet.logiciel}}</td>
                     <td>{{projet.sic}}</td>
                     <td>{{projet.description}}</td>
-                    <td><a href="{{ path('projet_accueil', {'idprojet':projet.id})}}" class="btn btn-primary">Accéder au projet</a></td>
+                    <td><a href="{{ path('projet_tableau_de_bord', {'idprojet':projet.id})}}" class="btn btn-primary">Accéder au projet</a></td>
                     <td><a href="{{ path('projet_edit', {'idprojet':projet.id})}}" class="btn btn-primary">Editer le projet</a></td>
 
                 </tr>

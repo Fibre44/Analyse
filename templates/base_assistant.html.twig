@@ -130,7 +130,7 @@
                 <a class="nav-link" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id, 'idsociete':societe.id})}}">Etablissement {{etablissement.libelle}} > </a> 
                 </li>
                 <li class"nav-item">
-                <a class="nav-link" href="{{ path('assistantcreationsociete_organisme',{'idprojet':projet.id, 'idsociete':societe.id, 'idetablissement':etablissement.id, 'nature':nature})}}">Selectionner {{nature}}</a> 
+                <a class="nav-link" href="{{ path('assistantcreationsociete_organisme',{'idprojet':projet.id, 'idsociete':societe.id, 'idetablissement':etablissement.id, 'typeorganisme':typeorganisme})}}">Selectionner {{typeorganisme}}</a> 
                 </li>            
             {% endif %}
             {%if controller_name == "Assistant_add_banque" %}

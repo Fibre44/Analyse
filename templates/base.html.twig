@@ -16,10 +16,12 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-            
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('accueil')}}">Vos projets</a>
-            </li>
+                <a class="nav-link" href="{{ path('accueil')}}">Revenir aux projets</a>
+            </li>           
+           <li class="nav-item">
+                <a class="nav-link" href="">Tableau de bord projet</a>
+            </li>            
              <li class="nav-item">
                 <a class="nav-link" href="{{ path('projet_assistantcreationsociete',{'idprojet':projet.id})}}">Assistant création société</a>
             </li>
@@ -30,12 +32,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="">Reprise des données</a>
             </li>
-           
-           <li class="nav-item">
-                <a class="nav-link" href="">Tableau de bord projet</a>
-            </li>
-
-
 
             {% if not app.user%}
    

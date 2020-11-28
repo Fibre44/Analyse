@@ -158,27 +158,6 @@ class ProjetController extends AbstractController
 
         ]);
     }
-
-    /**
-     * @Route("/projet/{idprojet}/accueil",name="projet_accueil")
-    */
-
-
-    public function accueil(ProjetRepository $repo,$idprojet){
-
-        $projet = $repo->find($idprojet);
-        $societes = $projet->getSocietes();
-        
-        $totalsociete=0;
-        
-        return $this->render('projet/accueil.html.twig',[
-            'projet'=>$projet,
-            'totalsociete'=>$totalsociete
-
-        ]);
-    }
-
-
     /**
      * @Route("/projet/{idprojet}/assistantcreationsociete",name="projet_assistantcreationsociete")
     */
@@ -210,6 +189,18 @@ class ProjetController extends AbstractController
         return $this->render('projet/assistantcreationparametragehrs.html.twig',[
             'projet'=>$projet,
             'societesprojet'=>$societes,
+        ]);
+    }
+    /**
+     * @Route("/projet/{idprojet}/tableaudebord",name="projet_tableau_de_bord")
+    */
+    public function projettableaudebord(ProjetRepository $repo,$idprojet){
+
+        $projet = $repo->find($idprojet);
+        
+        
+        return $this->render('projet/tableaudebord.html.twig',[
+            'projet'=>$projet,
         ]);
     }
 }

@@ -1,0 +1,35 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+
+<table class="etablissement">
+   
+    <thead>
+        <tr>
+                
+            <th>Nic</th>
+            <th>Libelle</th>
+            <th>Adresse</th>
+            <th>Code postal</th>
+            <th>Ville</th>
+        </tr>            
+        
+    </thead>
+        <tbody>
+            <tr>              
+                <td>{{etablissement.nic}}</td>
+                <td>{{etablissement.libelle}}</td>
+                <td>{{etablissement.adresse}}</td>                                                  
+                <td>{{etablissement.codepostal}}</td>                                                  
+                <td>{{etablissement.ville}}</td>                                                  
+                                         
+            </tr>
+          
+
+           
+        </tbody>
+</table>
+
+
+{%endblock%}

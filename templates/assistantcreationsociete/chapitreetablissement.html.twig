@@ -1,0 +1,43 @@
+{% extends 'base_assistant.html.twig' %}
+
+{% block title %}Accueil de l'assistant {% endblock %}
+
+{% block body %}
+
+<strong>Chapitre création établissement</strong>
+
+
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_etablissement_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Création d'un etablissement</a></br>
+
+<strong>Liste des etablissements</strong></br>
+
+ <table class="ccn">
+    
+        <thead>
+            <tr>
+                
+                    <th>Idcc</th>
+                    <th>Libelle</th>
+                    <th>Voir la CCN</th>
+             </tr>
+        
+        </thead>
+        <tbody>
+
+
+            {%for etablissement in societe.etablissements %}
+                <tr>
+                    <td>{{etablissement.libelle}}</td>
+                    <td>{{etablissement.nic}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_etablissement_show',{'idprojet':projet.id,'idsociete':societe.id,'idetablissement':etablissement.id})}}">Voir l'établissement</a></td>                   
+                </tr>
+            {%endfor%}
+
+            <tfoot>
+             
+            </tfoot>
+            
+        </tbody>
+     </table>
+
+{% endblock %}

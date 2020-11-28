@@ -113,7 +113,7 @@ class AssistantcreationsocieteController extends AbstractController
     }
 
      /**
-     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/index/chapitreccn", name="assistantcreationsociete_chapitreccn")
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/chapitreccn", name="assistantcreationsociete_chapitreccn")
      */
     public function chapitreccn(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
         $entityManager = $this->getDoctrine()->getManager();
@@ -126,6 +126,24 @@ class AssistantcreationsocieteController extends AbstractController
             'projet'=>$projet,
             'societe'=>$societe,
             'controller_name' => 'Assistant_chapitre_ccn',
+
+        ]);
+
+    }
+     /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/chapitreetablissement", name="assistantcreationsociete_chapitreetablissement")
+     */
+    public function chapitreetablissement(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+
+        return $this->render('assistantcreationsociete/chapitreetablissement.html.twig',[
+            
+            'projet'=>$projet,
+            'societe'=>$societe,
+            'controller_name' => 'Assistant_chapitre_etablissemet',
 
         ]);
 
@@ -431,12 +449,33 @@ class AssistantcreationsocieteController extends AbstractController
         return $this->render('assistantcreationsociete/show_emploi.html.twig',[
             'societe'=>$societe,
             'projet'=>$projet,
-            'controller_name' => 'Assistant_voir_emploi'
+            'controller_name' => 'Assistant_show_emploi'
 
         ]);    
 
      }
 
+      /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/show", name="assistantcreationsociete_etablissement_show")
+     */
+
+    public function showetablissement(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,EtablissementRepository $repoetablissement,$idetablissement){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repoprojet->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+        $etablissement = $repoetablissement->find($idetablissement);
+     
+        return $this->render('assistantcreationsociete/show_etablissement.html.twig',[
+            'societe'=>$societe,
+            'projet'=>$projet,
+            'etablissement'=>$etablissement,
+            'controller_name' => 'Assistant_show_etabissement'
+
+        ]);    
+
+
+    }
      /**
      * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/new", name="assistantcreationsociete_etablissement_create")
      */
@@ -495,7 +534,7 @@ class AssistantcreationsocieteController extends AbstractController
             $entityManager->persist($congespayes);
             $entityManager->flush();
 
-            return $this->redirectToRoute('assistantcreationsociete_organisme', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId(),'nature'=>'URSSAF']);
+            return $this->redirectToRoute('assistantcreationsociete_organisme', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId(),'typeorganisme'=>"URSSAF"]);
         }
         return $this->render('assistantcreationsociete/congespayes_create.html.twig',[
             'societe'=>$societe,
@@ -510,14 +549,14 @@ class AssistantcreationsocieteController extends AbstractController
 
 
     /**
-     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/{nature}/new", name="assistantcreationsociete_organisme")
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/annuaire_organisme/{typeorganisme}/new", name="assistantcreationsociete_organisme")
     */
 
-     public function showannuaireorganisme(ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,AnnuaireorganismeRepository $repoannuaireorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
+     public function showannuaireorganisme(ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,AnnuaireorganismeRepository $repoannuaireorganisme,EtablissementRepository $repoetablissement,$idetablissement,$typeorganisme){
         
         $entityManager = $this->getDoctrine()->getManager();
 
-        $annuaireorganismes=$repoannuaireorganisme->findBy(['type'=>$nature]);
+        $annuaireorganismes=$repoannuaireorganisme->findBy(['type'=>$typeorganisme]);
         $projet = $repoprojet->find($idprojet);
         $societe = $reposociete->find($idsociete);
         $etablissement = $repoetablissement->find($idetablissement);
@@ -528,17 +567,17 @@ class AssistantcreationsocieteController extends AbstractController
             'societe'=>$societe,
             'projet'=>$projet,
             'etablissement'=>$etablissement,
-            'nature'=>$nature,
+            'typeorganisme'=>$typeorganisme,
             'controller_name' => 'Assistant_add_organisme'
 
         ]);
      }
 
     /**
-     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/annuaireorganisme/{idorganisme}/affecterorganisme/{nature}", name="assistantcreationsociete_organisme_create")
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/etablissement/{idetablissement}/annuaireorganisme/{idorganisme}/affecterorganisme/{typeorganisme}", name="assistantcreationsociete_organisme_create")
      */
 
-     public function affecterorganisme(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,AnnuaireorganismeRepository $repoannuaireorganisme,$idorganisme,EtablissementRepository $repoetablissement,$idetablissement,$nature){
+     public function affecterorganisme(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,AnnuaireorganismeRepository $repoannuaireorganisme,$idorganisme,EtablissementRepository $repoetablissement,$idetablissement,$typeorganisme){
        
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -565,7 +604,7 @@ class AssistantcreationsocieteController extends AbstractController
 
         }
         else{
-            return $this->redirectToRoute('assistantcreationsociete_organisme', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId(),'nature'=>$nature]);
+            return $this->redirectToRoute('assistantcreationsociete_organisme', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idetablissement'=>$etablissement->getId(),'typeorganisme'=>$typeorganisme]);
         }
      }
 
