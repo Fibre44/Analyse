@@ -27,7 +27,7 @@ class Criteremaintien
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $populatin;
+    private $population;
 
     /**
      * @ORM\ManyToOne(targetEntity=Conventioncollective::class, inversedBy="criteremaintiens")
@@ -62,14 +62,14 @@ class Criteremaintien
         return $this;
     }
 
-    public function getPopulatin(): ?string
+    public function getPopulation(): ?string
     {
-        return $this->populatin;
+        return $this->population;
     }
 
-    public function setPopulatin(string $populatin): self
+    public function setPopulation(string $population): self
     {
-        $this->populatin = $populatin;
+        $this->population = $population;
 
         return $this;
     }

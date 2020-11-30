@@ -24,7 +24,8 @@ use App\Entity\Primeanciennetevaleur;
 use App\Entity\Congepaye;
 use App\Entity\Tauxat;
 use App\Entity\Organisme;
-
+use App\Entity\Criteremaintien;
+use App\Entity\Tablemaintien;
 
 use App\Repository\ProjetRepository;
 use App\Repository\SocieteRepository;
@@ -41,6 +42,7 @@ use App\Repository\AxeRepository;
 use App\Repository\CalendrierRepository;
 use App\Repository\HoraireRepository;
 use App\Repository\PrimeanciennetepopulationRepository;
+use App\Repository\CriteremaintienRepository;
 
 use App\Form\SocieteType;
 use App\Form\EtablissementType;
@@ -56,6 +58,8 @@ use App\Form\PrimeanciennetepopulationType;
 use App\Form\PrimeanciennetevaleurType;
 use App\Form\CongespayesType;
 use App\Form\TauxatType;
+use App\Form\CriteremaintienType;
+use App\Form\TablemaintienType;
 
 
 
@@ -355,7 +359,7 @@ class AssistantcreationsocieteController extends AbstractController
             'projet'=>$projet,
             'ccn'=>$ccn,
             'formPrimeanciennetepopulation'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_populationprimeanciennete'
+            'controller_name' => 'Assistant_add_populationprimeanciennete'
 
         ]);    
     }
@@ -394,11 +398,83 @@ class AssistantcreationsocieteController extends AbstractController
             'ccn'=>$ccn,
             'population'=>$primeanciennetepopulation,
             'formPrimeanciennetevaleur'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_valeurprimeanciennete'
+            'controller_name' => 'Assistant_add_valeurprimeanciennete'
 
         ]);    
     }
-  
+
+    /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/ccn/{idccn}/absencemaintien/new", name="assistantcreationsociete_absencemaintien_create")
+    */
+
+    public function addabsencemaintien (Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,ConventioncollectiveRepository $repoccn,$idccn){
+        
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repoprojet->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+        $ccn = $repoccn->find($idccn);
+        
+        $criteremaintien = new Criteremaintien;
+
+        $form = $this->createForm(CriteremaintienType::class,$criteremaintien);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $ccn->addCriteremaintien($criteremaintien);
+            $entityManager->persist($criteremaintien);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('assistantcreationsociete_tablemaintien_create', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId(),'idabsencemaintien'=>$criteremaintien->getId()]);
+        }
+        return $this->render('assistantcreationsociete/absencemaintien_create.html.twig',[
+            'societe'=>$societe,
+            'projet'=>$projet,
+            'ccn'=>$ccn,
+            'formAbsencemaintien'=>$form->createView(),
+            'controller_name' => 'Assistant_add_absencemaintien'
+
+        ]);    
+    }
+    /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/ccn/{idccn}/absencemaintien/{idabsencemaintien}/tablemaintien/new", name="assistantcreationsociete_tablemaintien_create")
+    */
+
+    public function addtablemaintien (Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,ConventioncollectiveRepository $repoccn,$idccn,CriteremaintienRepository $repocriteremaintien,$idabsencemaintien ){
+        
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repoprojet->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+        $ccn = $repoccn->find($idccn);        
+        $criteremaintien = $repocriteremaintien->find($idabsencemaintien);
+
+        $tablemaintien = new Tablemaintien;
+
+        $form = $this->createForm(TablemaintienType::class,$tablemaintien);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $criteremaintien->addTablemaintien($tablemaintien);
+            $entityManager->persist($tablemaintien);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('assistantcreationsociete_tablemaintien_create', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId(),'idabsencemaintien'=>$criteremaintien->getId()]);
+        }
+        return $this->render('assistantcreationsociete/tablemaintien_create.html.twig',[
+            'societe'=>$societe,
+            'projet'=>$projet,
+            'ccn'=>$ccn,
+            'criteremaintien'=>$criteremaintien,
+            'formTablemaintien'=>$form->createView(),
+            'controller_name' => 'Assistant_add_tablemaintien'
+
+        ]);    
+    }
      /**
      * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/libellemploi/new", name="assistantcreationsociete_emploi_create")
      */

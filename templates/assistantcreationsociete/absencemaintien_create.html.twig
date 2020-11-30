@@ -1,0 +1,15 @@
+{% extends 'base_assistant.html.twig' %}
+
+{%block body %}
+
+    <strong>Absence</strong>
+
+    {{form_start(formAbsencemaintien)}}
+   
+    {{form_widget(formAbsencemaintien)}}
+
+    <button type="submit" class="btn btn-primary">Créer une grille de maintien</button>
+
+    {{form_end(formAbsencemaintien)}}
+
+{%endblock%}

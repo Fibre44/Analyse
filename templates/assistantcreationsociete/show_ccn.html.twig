@@ -3,9 +3,9 @@
 {%block body %}
 
 
-<p>Bibliotheque du projet</p>
+<p>Bibliotheque du projet {{ccnprojet.libelle}}</p>
    
-<p>Liste des classifications de la CCN {{ccnprojet.idcc}}</p>
+<p>Liste des classifications de la CCN</p>
 
 <table class="classifications">
     
@@ -21,10 +21,8 @@
                 <tr>
                     <td>{{classification.type}}</td>
                     <td>{{classification.valeur}}</td>
-                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_remove_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id,'idclassification':classification.id,})}}">Editer la classification</a></td>
-                    <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_remove_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id,'idclassification':classification.id,})}}">Supprimer la classification</a></td>
-
-                
+                    <td><a class="btn btn-danger" href="{{ path('assistantcreationsociete_remove_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id,'idclassification':classification.id,})}}">Supprimer la classification</a></td>
+              
                 </tr>
              {%endfor%}
 
@@ -32,6 +30,69 @@
      </table>
 <a class="nav-link" href="{{ path('assistantcreationsociete_add_classification',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id})}}">Ajouter des classifications</a>
 
-<a class="nav-link" href="{{ path('assistantcreationsociete_emploi_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer les emplois</a>
+<p>Liste des tables d'ancienneté de la CCN</p>
+
+<table class="anciennete">
+    
+        <thead>
+            <tr>
+                    <th>Population</th>
+                    <th>Nombre de mois</th>
+                    <th>Pourcentage</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for anciennete in ccnprojet.primeanciennetepopulations%}
+                    {%for valeur in anciennete.primeanciennetevaleurs%}
+                    <tr>
+
+                        <td>{{anciennete.libelle}}</td>
+                        <td>{{valeur.anciennetemois}}</td>
+                        <td>{{valeur.pourcentage}}</td>
+                    </tr>
+                    {%endfor%}                
+             {%endfor%}
+
+        </tbody>
+     </table>
+<a class="nav-link" href="{{ path('assistantcreationsociete_primeanciennetepopulation_create',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id})}}">Ajouter une nouvelle table d'ancienneté</a>
+
+
+<p>Liste des tables d'ancienneté de la CCN</p>
+
+<table class="maintien">
+    
+        <thead>
+            <tr>
+                    <th>Absence</th>
+                    <th>Population</th>                
+                    <th>Nombre de mois minimum</th>
+                    <th>Nombre de mois maximum</th>
+                    <th>Nombre de jours</th>
+                    <th>Nombre de jours de carence</th>
+                    <th>Pourcentage</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for populationmaintien in ccnprojet.criteremaintiens%}
+                    {%for pourcentagemaintien in populationmaintien.tablemaintiens%}
+                    <tr>
+                        <td>{{populationmaintien.population}}</td>
+                        <td>{{populationmaintien.absence}}</td>
+                        <td>{{pourcentagemaintien.anciennetedebut}}</td>
+                        <td>{{pourcentagemaintien.anciennetefin}}</td>
+                        <td>{{pourcentagemaintien.dureemaximale}}</td>
+                        <td>{{pourcentagemaintien.jourscarenceemployeur}}</td>
+                        <td>{{pourcentagemaintien.tauxmaintien}}</td>
+                    </tr>
+                    {%endfor%}                
+             {%endfor%}
+
+        </tbody>
+     </table>
+<a class="nav-link" href="{{ path('assistantcreationsociete_absencemaintien_create',{'idprojet':projet.id,'idsociete':societe.id,'idccn':ccnprojet.id})}}">Ajouter une nouvelle table de maintien</a>
+
 
 {%endblock%}
