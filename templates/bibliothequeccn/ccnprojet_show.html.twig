@@ -63,7 +63,39 @@
         </tbody>
 </table>
 
+<p>Liste des tables de maintien de la CCN</p>
 
+<table class="maintien">
+    
+        <thead>
+            <tr>
+                    <th>Absence</th>
+                    <th>Population</th>                
+                    <th>Nombre de mois minimum</th>
+                    <th>Nombre de mois maximum</th>
+                    <th>Nombre de jours</th>
+                    <th>Nombre de jours de carence</th>
+                    <th>Pourcentage</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for populationmaintien in ccnprojet.criteremaintiens%}
+                    {%for pourcentagemaintien in populationmaintien.tablemaintiens%}
+                    <tr>
+                        <td>{{populationmaintien.population}}</td>
+                        <td>{{populationmaintien.absence}}</td>
+                        <td>{{pourcentagemaintien.anciennetedebut}}</td>
+                        <td>{{pourcentagemaintien.anciennetefin}}</td>
+                        <td>{{pourcentagemaintien.dureemaximale}}</td>
+                        <td>{{pourcentagemaintien.jourscarenceemployeur}}</td>
+                        <td>{{pourcentagemaintien.tauxmaintien}}</td>
+                    </tr>
+                    {%endfor%}                
+             {%endfor%}
+
+        </tbody>
+     </table>
 
 
     

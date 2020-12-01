@@ -335,7 +335,7 @@ class BibliothequeccnController extends AbstractController
        
         $ccnprojet=$repoconventioncollective->find($idccnprojet);
 
-        return $this->render('bibliothequeccn/bibliothequeccnprojet_show.html.twig', [
+        return $this->render('bibliothequeccn/ccnprojet_show.html.twig', [
             'ccnprojet'=>$ccnprojet,
             'controller_name' => 'showccnprojet',
         ]);
@@ -375,7 +375,7 @@ class BibliothequeccnController extends AbstractController
 
             foreach ($ccnprojet->getPrimeanciennetepopulations() as $populationprimeanciennete){
                 
-                //$populationprimeanciennete est un object de la class Primeanciennetepopulation
+                //$populationprimeanciennete est un objet de la class Primeanciennetepopulation
 
                 $primeanciennetebibliotheque = new Bibliothequeprimeanciennetepopulation();
                 $primeanciennetebibliotheque->setLibelle($populationprimeanciennete->getLibelle());
@@ -388,14 +388,15 @@ class BibliothequeccnController extends AbstractController
                 // on ajoute les valeurs de la prime d'ancienneté
                 foreach ($populationprimeanciennete->getPrimeanciennetevaleurs() as $valeurprimeanciennete){
 
-                    //$valeurprimeanciennete est un object de la class Primeanciennetevaleur
+                    //$valeurprimeanciennetebibliotheque est un objet de la class Primeanciennetevaleur
 
-                    $primeanciennetevaleurbibliotheque = new Bibliothequeprimeanciennetevaleur();
-                    $primeanciennetevaleurbibliotheque->setAnciennetemois($valeurprimeanciennete->getAnciennetemois());
-                    $primeanciennetevaleurbibliotheque->setPourcentage($valeurprimeanciennete->getPourcentage());
-                    $primeanciennetevaleurbibliotheque->setSigne($valeurprimeanciennete->getSigne());
-                    $populationprimeanciennete->addPrimeanciennetevaleur($valeurprimeanciennete);
-                    $entityManager->persist($valeurprimeanciennete);
+                    $valeurprimeanciennetebibliotheque = new Bibliothequeprimeanciennetevaleur();
+                    $valeurprimeanciennetebibliotheque->setAnciennetemois($valeurprimeanciennete->getAnciennetemois());
+                    $valeurprimeanciennetebibliotheque->setPourcentage($valeurprimeanciennete->getPourcentage());
+                    $valeurprimeanciennetebibliotheque->setSigne($valeurprimeanciennete->getSigne());
+                    $valeurprimeanciennetebibliotheque->setEtendu('1');
+                    $primeanciennetebibliotheque->addBibliothequeprimeanciennetevaleur($valeurprimeanciennetebibliotheque);
+                    $entityManager->persist($valeurprimeanciennetebibliotheque);
                     $entityManager->flush();
            
                 } 

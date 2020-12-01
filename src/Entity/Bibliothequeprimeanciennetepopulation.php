@@ -94,7 +94,7 @@ class Bibliothequeprimeanciennetepopulation
         return $this->yes;
     }
 
-    public function add(Bibliothequeprimeanciennetevaleur $ye): self
+    public function addBibliothequeprimeanciennetevaleur(Bibliothequeprimeanciennetevaleur $ye): self
     {
         if (!$this->yes->contains($ye)) {
             $this->yes[] = $ye;

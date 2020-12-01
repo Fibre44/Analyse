@@ -20,86 +20,84 @@
         <tbody>
 
 
-            {%for coefficients in ccn.bibliothequeclassifications%}
+            {%for classifications in ccn.bibliothequeclassifications%}
 
-                {%if coefficients.type=="Coefficient"%}
-
-                    <tr>
-                        <td>Coefficient</td>
-                        <td>{{coefficients.valeur}}</td>
+                 <tr>
+                    <td>{{classifications.type}}</td>
+                    <td>{{classifications.valeur}}</td>
                     
-                    </tr>
+                </tr>
             
-                {%endif%}
-
-          {%endfor%}
+            {%endfor%}
              
         </tbody>
 </table>
 
 </br>
 
-<p>Liste des qualification</p>
+<p>Liste des tables d'ancienneté de la CCN</p>
 
-<table class="qualifications">
+<table class="anciennete">
     
         <thead>
-            <tr>             
-                <th>Nature</th>
-                <th>Valeur</th>
-                   
-            </tr>
-        
-        </thead>
-        <tbody>
-
-
-            {%for qualifications in ccn.bibliothequeclassifications%}
-
-                {%if qualifications.type=="Qualification"%}
-
-                    <tr>
-                        <td>Qualifation</td>
-                        <td>{{qualifications.valeur}}</td>
-                    
-                    </tr>
-            
-                {%endif%}
-
-          {%endfor%}
-             
-        </tbody>
-</table>
-
-</br>
-
-<p>Maintien des salaires</p>
-
-<table class="qualifications">
-    
-        <thead>
-            <tr>             
-                <th>Absence</th>
-                <th>Population</th>
-                   
-            </tr>
-        
-        </thead>
-        <tbody>
-
-
-            {%for maintiens in ccn.bibliothequecriteremaintiens%}
-
             <tr>
-                <td>{{maintiens.absence}}</td>
-                <td>{{maintiens.population}}</td>
-             
+                    <th>Population</th>
+                    <th>Nombre de mois</th>
+                    <th>Signe</th>
+                    <th>Pourcentage</th>
+                    <th>Etendu</th>
             </tr>
-            
-          {%endfor%}
-             
-        </tbody>
-</table>
+        
+        </thead>
+        <tbody>
+                {%for anciennete in ccn.bibliothequeprimeanciennetepopulations%}
+                    {%for valeur in anciennete.bibliothequeprimeanciennetevaleur%}
+                    <tr>
 
+                        <td>{{anciennete.libelle}}</td>
+                        <td>{{valeur.anciennetemois}}</td>
+                        <td>{{valeur.signe}}</td>
+                        <td>{{valeur.pourcentage}}</td>
+                        <td>{{valeur.etendu}}</td>
+                    </tr>
+                    {%endfor%}                
+             {%endfor%}
+
+        </tbody>
+     </table>
+
+<p>Liste des tables de maintien de la CCN</p>
+
+<table class="maintien">
+    
+        <thead>
+            <tr>
+                    <th>Absence</th>
+                    <th>Population</th>                
+                    <th>Nombre de mois minimum</th>
+                    <th>Nombre de mois maximum</th>
+                    <th>Nombre de jours</th>
+                    <th>Nombre de jours de carence</th>
+                    <th>Pourcentage</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for populationmaintien in ccn.bibliothequecriteremaintiens%}
+                    {%for pourcentagemaintien in populationmaintien.bibliothequetablemaintiens%}
+                    <tr>
+                        <td>{{populationmaintien.population}}</td>
+                        <td>{{populationmaintien.absence}}</td>
+                        <td>{{pourcentagemaintien.anciennetedebut}}</td>
+                        <td>{{pourcentagemaintien.anciennetefin}}</td>
+                        <td>{{pourcentagemaintien.dureemaximale}}</td>
+                        <td>{{pourcentagemaintien.jourscarenceemployeur}}</td>
+                        <td>{{pourcentagemaintien.tauxmaintien}}</td>
+                    </tr>
+                    {%endfor%}                
+             {%endfor%}
+
+        </tbody>
+     </table>
 {%endblock%}
 
