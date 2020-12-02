@@ -136,7 +136,7 @@ class ProjetController extends AbstractController
 
     }
     /**
-     * @Route("/projet/{idprojet}",name="projet_analyse")
+     * @Route("/projet/{idprojet}/cahier_analyse/all",name="projet_analyse")
     */
 
     public function show(ProjetRepository $repo,$idprojet){
@@ -154,8 +154,6 @@ class ProjetController extends AbstractController
 
         return $this->render('projet/show.html.twig',[
             'projet'=>$projet,
-            'totalsociete'=>$totalsociete
-
         ]);
     }
     /**

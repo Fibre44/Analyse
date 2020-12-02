@@ -1,0 +1,15 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une modification</h1>
+
+    {{form_start(formBibliothquemodification)}}
+    {{form_widget(formBibliothquemodification)}}
+    <button type="submit" class="btn btn-primary">Créer une modification </button>
+
+    {{form_end(formBibliothquemodification)}}
+
+
+
+{%endblock%}

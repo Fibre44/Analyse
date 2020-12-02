@@ -28,6 +28,41 @@ use App\Form\RubriqueType;
 
 class AssistantparametragehrsController extends AbstractController
 {
+
+     /**
+     * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/index", name="assistantparametragehrs_index")
+     */
+    public function index(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+
+        return $this->render('assistantparametragehrs/index.html.twig',[            
+            'projet'=>$projet,
+            'societe'=>$societe,
+            'controller_name' => 'Assistant_parametrage_index',
+
+        ]);
+
+    }
+    /**
+     * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/chapitrezoneslibres", name="assistantparametragehrs_chapitrezoneslibres")
+     */
+    public function chapitrezoneslibres(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+
+        return $this->render('assistantparametragehrs/chapitrezoneslibres.html.twig',[            
+            'projet'=>$projet,
+            'societe'=>$societe,
+            'controller_name' => 'Assistant_parametrage_index',
+
+        ]);
+
+    }
     /**
      * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/zoneslibres", name="assistantparametragehrszoneslibres_create")
      */
@@ -93,7 +128,24 @@ class AssistantparametragehrsController extends AbstractController
             'controller_name' => 'Création valeur zone libre',
         ]);
     }
+    /**
+     * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/zoneslibres/{idzonelibre}/show", name="assistantparametragehrszoneslibresvaleur_show")
+     */
+    public function showzonelibrevaleur(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete,ZonelibrehrsRepository $repozonelibre, $idzonelibre)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
 
+        $projet = $repoprojet->find($idprojet);
+        $societe=$reposociete->find($idsociete);
+        $zonelibrehrs=$repozonelibre->find($idzonelibre);
+        
+        return $this->render('assistantparametragehrs/valeurszoneslibres_show.html.twig', [
+            'projet'=>$projet,
+            'societe'=>$societe,
+            'zonelibre'=>$zonelibrehrs,
+            'controller_name' => 'zones_libres_show',
+        ]);
+    }
     /**
      * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/tauxabsence", name="assistantparametragetauxabsence_create")
      */

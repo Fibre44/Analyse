@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Projet analyse</a>
@@ -16,15 +16,10 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-       
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('projet_create')}}">Créer un projet</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('bibliothequeccn')}}">Bilbiotheque des conventions collectives</a>
-            </li>
-
-
+                <a class="nav-link" href="{{ path('bibliothequeccn')}}">Bibliotheque</a>
+            </li>      
+           
             {% if not app.user%}
    
                 <li class"nav-item">
@@ -43,9 +38,6 @@
             {% endif %}
         </div>
     </nav>
-     <div class"container">
-
-{% block body %}
 
 
  <p>Bonjour {{utilisateur.nom}} {{utilisateur.prenom}} </p>
@@ -72,14 +64,12 @@
                     <td>{{projet.description}}</td>
                     <td><a href="{{ path('projet_tableau_de_bord', {'idprojet':projet.id})}}" class="btn btn-primary">Accéder au projet</a></td>
                     <td><a href="{{ path('projet_edit', {'idprojet':projet.id})}}" class="btn btn-primary">Editer le projet</a></td>
-
                 </tr>
             {%endfor%}
 
         </tbody>
      </table>
+<a href="{{ path('projet_create')}}" class="btn btn-primary">Créer un projet</a></td>
 
 
-
-
-{% endblock %}
+</body>

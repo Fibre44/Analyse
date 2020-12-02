@@ -18,6 +18,7 @@ use App\Entity\Utilisateur;
 use App\Entity\Projet;
 use App\Entity\Conventioncollective;
 use App\Entity\Annuaireorganisme;
+use App\Entity\Bibliothequemodification;
 
 use App\Repository\BibliothequeccnRepository;
 use App\Repository\BibliothequeclassificationRepository;
@@ -39,6 +40,7 @@ use App\Form\BibliothequeprimeanciennetevaleurType;
 use App\Form\BibliothequesmcvaleurType;
 use App\Form\BibliothequesmcpopulationType;
 use App\Form\AnnuaireorganismeType;
+use App\Form\BibliothequemodificationType;
 
 
 
@@ -444,5 +446,29 @@ class BibliothequeccnController extends AbstractController
         ]);
 
     }
-    
+    /**
+     * @Route("/bibliothequeccn/proposerccn/{idbibliothequeccn}/demande/ancienid/{ancienid}/ancienvaleur/{ancienvaleur}/new", name="bibliotheque_demande_create")
+    */
+    public function adddemandemodification(Request $request,BibliothequeccnRepository $repobibliothequeccn,$idbibliothequeccn,$ancienid,$ancienvaleur){
+        $entityManager = $this->getDoctrine()->getManager();
+        $bibliothequeccn = $repobibliothequeccn->find($idbibliothequeccn);
+
+        $bibliothequemodificationnew= new Bibliothequemodification ($ancienid,$ancienvaleur);
+        
+        $form = $this->createForm(BibliothequemodificationType::class, $bibliothequemodificationnew);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $bibliothequeccn->addBibliothequemodification($bibliothequemodificationnew);
+            $entityManager->persist($bibliothequemodificationnew);            
+            $entityManager->flush();
+            return $this->redirectToRoute('bibliothequeccn_show', ['idbibliothequeccn'=>$bibliothequeccn->getId()]);
+
+        }
+        return $this->render('bibliothequeccn/modification_create.html.twig',[
+            'controller_name' => 'bibliotheque_add_modification',
+            'formBibliothquemodification'=>$form->createView()
+            ]);
+        }
 }

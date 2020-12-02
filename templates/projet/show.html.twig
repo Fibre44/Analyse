@@ -3,10 +3,7 @@
 
 
 
-   <strong>Liste des sociétés</strong>
-
-    <a class="nav-link" href="{{ path('societe_create',{'idprojet':projet.id})}}">Ajouter une societe</a>
-   {%if totalsociete >1 %}
+<strong>Liste des sociétés</strong>
 
     <table class="societes">
     
@@ -18,15 +15,6 @@
                     <th>Adresse</th>
                     <th>Code postal</th>
                     <th>Ville</th>
-                    <th>Editer société</th>
-                    <th>Créer un établissement</th>
-                    <th>Créer l'analytique</th>
-                    <th>Créer les zones libres</th>
-                    <th>Créer les classifications</th>
-                    <th>Créer les CCN</th>
-                    <th>Créer une rubrique</th>
-
-
             </tr>
         
         </thead>
@@ -40,31 +28,12 @@
                     <td>{{societe.adresse}}</td>
                     <td>{{societe.codepostal}}</td>
                     <td>{{societe.ville}}</td>
-                    <td><a class="nav-link" href="{{ path('societe_create',{'idprojet':projet.id})}}">Editer la société</a></td>
-                    <td><a class="nav-link" href="{{ path('etablissement_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer un établissement</a></td>
-                    <td><a class="nav-link" href="{{ path('rubrique_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer une rubrique</a></td>
 
                 </tr>
             {%endfor%}
 
-            <tfoot>
-                <tr>
-                    <td colspan="1">Total societes:
-                    </td>
-                    <td>{{totalsociete}}</td>
-                                      
-                </tr>
-            </tfoot>
-            
         </tbody>
      </table>
-
-    {%else%}
-
-       <a class="nav-link" href="{{ path('societe_create',{'idprojet':projet.id})}}">Vous devez créer une société</a>
-
-
-    {%endif%}
 
     <strong>Liste des établissements</strong>
 
@@ -78,7 +47,6 @@
                     <th>Adresse</th>
                     <th>Code postal</th>
                     <th>Ville</th>
-                    <th>Créer des organismes</th>
 
             </tr>
         
@@ -95,8 +63,6 @@
                     <td>{{etablissement.adresse}}</td>
                     <td>{{etablissement.codepostal}}</td>
                     <td>{{etablissement.ville}}</td>
-                    <td><a class="nav-link" href="{{ path('organisme_create',{'idprojet':projet.id,'idetablissement':etablissement.id})}}">Créer un organisme</a></td>
-
                 </tr>
                 {%endfor%}
 
@@ -113,7 +79,6 @@
                     <th>Libellé établissement</th>
                     <th>IBAN</th>
                     <th>BIC</th>
-
             </tr>
         
         </thead>
@@ -122,13 +87,10 @@
             {%for societe in projet.societes %}
                 {% for etablissement in societe.etablissements%}
                     {% for banque in etablissement.banques%}
-
-
                     <tr>
                         <th>{{etablissement.libelle}}</td>
                         <td>{{banque.iban}}</td>
                         <td>{{banque.bic}}</td>
-
                     </tr>
                     {%endfor%}
 
@@ -153,7 +115,6 @@
         </thead>
             <tbody>
             {%for societe in projet.societes %}
-
                 {%for emploi in societe.emplois %}
                     <tr>          
                         <td>{{societe.raisonsociale}}</td>
@@ -164,17 +125,14 @@
             {%endfor%}
            
             </tbody>
-    </table>
+    </table>  
 
-   
-
-     <strong>Liste des rubriques</strong>
+    <strong>Liste des rubriques</strong>
 
     <table class="rubriques">
     
         <thead>
-            <tr>
-                
+            <tr>               
                     <th>Raisonsociale</th>
                     <th>SIREN</th>
                     <th>Adresse</th>
@@ -185,18 +143,13 @@
                     <th>Taux</th>
                     <th>Montant</th>      
                     <th>DSN périodicté</th>      
-
-            </tr>
-
-                 
+            </tr>               
         
         </thead>
         <tbody>
 
-
             {%for societe in projet.societes %}
                 {%for rubrique in societe.rubriques %}
-
                 <tr>
                     <th>{{societe.raisonsociale}}</td>
                     <td>{{societe.siren}}</td>
@@ -206,9 +159,7 @@
                     <td>{{rubrique.base}}</td>
                     <td>{{rubrique.taux}}</td>
                     <td>{{rubrique.montant}}</td>
-                    <td>{{rubrique.dsnperiodeprime}}</td>
-
-                   
+                    <td>{{rubrique.dsnperiodeprime}}</td>                  
                                 
                 </tr>
                 {%endfor%}

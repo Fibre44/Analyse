@@ -35,7 +35,7 @@
                     <td>{{societes.siren}}</td>
                     <td>{{societes.raisonsociale}}</td>
                     <td><a class="btn btn-primary" href="{{ path('assistantcreationsociete_index',{'idprojet':projet.id,'idsociete':societes.id})}}">Assistant création société</a></td>
-                    <td><a class="btn btn-primary" href="{{ path('assistantparametragehrszoneslibres_create',{'idprojet':projet.id,'idsociete':societes.id})}}">Assistant création paramétrage</a></td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantparametragehrs_index',{'idprojet':projet.id,'idsociete':societes.id})}}">Assistant création paramétrage</a></td>
                 </tr>
             {%endfor%}
 

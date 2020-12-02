@@ -1,4 +1,4 @@
-{% extends 'base_assistanteparametrage.html.twig' %}
+{% extends 'base_assistantparametrage.html.twig' %}
 
 {%block body %}
 
@@ -13,9 +13,5 @@
     <button type="submit" class="btn btn-primary">Créer une liste  déroulante libre</button>
 
     {{form_end(formZonelibrehrs)}}
-
-<a href="{{ path('assistantparametragetauxabsence_create', {'idprojet':projet.id,'idsociete':societe.id})}}" class="btn btn-primary">Ajour une taux d'absence</a>
-
-
 
 {%endblock%}

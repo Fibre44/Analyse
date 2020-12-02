@@ -106,8 +106,7 @@ class AssistantcreationsocieteController extends AbstractController
         $projet = $repo->find($idprojet);
         $societe = $reposociete->find($idsociete);
 
-        return $this->render('assistantcreationsociete/index.html.twig',[
-            
+        return $this->render('assistantcreationsociete/index.html.twig',[            
             'projet'=>$projet,
             'societe'=>$societe,
             'controller_name' => 'Assistant_index',

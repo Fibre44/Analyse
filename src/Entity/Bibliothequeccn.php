@@ -60,6 +60,11 @@ class Bibliothequeccn
      */
     private $bibliothequesmcpopulations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Bibliothequemodification::class, mappedBy="bibliothequeccn", orphanRemoval=true)
+     */
+    private $bibliothequemodifications;
+
     public function __construct()
     {
         $this->bibliothequeclassifications = new ArrayCollection();
@@ -67,6 +72,7 @@ class Bibliothequeccn
         $this->primeanciennetepopulations = new ArrayCollection();
         $this->bibliothequeprimeanciennetepopulations = new ArrayCollection();
         $this->bibliothequesmcpopulations = new ArrayCollection();
+        $this->bibliothequemodifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,6 +234,36 @@ class Bibliothequeccn
             // set the owning side to null (unless already changed)
             if ($bibliothequesmcpopulation->getBibliothequeccn() === $this) {
                 $bibliothequesmcpopulation->setBibliothequeccn(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bibliothequemodification[]
+     */
+    public function getBibliothequemodifications(): Collection
+    {
+        return $this->bibliothequemodifications;
+    }
+
+    public function addBibliothequemodification(Bibliothequemodification $bibliothequemodification): self
+    {
+        if (!$this->bibliothequemodifications->contains($bibliothequemodification)) {
+            $this->bibliothequemodifications[] = $bibliothequemodification;
+            $bibliothequemodification->setBibliothequeccn($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBibliothequemodification(Bibliothequemodification $bibliothequemodification): self
+    {
+        if ($this->bibliothequemodifications->removeElement($bibliothequemodification)) {
+            // set the owning side to null (unless already changed)
+            if ($bibliothequemodification->getBibliothequeccn() === $this) {
+                $bibliothequemodification->setBibliothequeccn(null);
             }
         }
 

@@ -1,0 +1,35 @@
+{% extends 'base_assistantparametrage.html.twig' %}
+
+{% block title %}Accueil de l'assistant {% endblock %}
+
+{% block body %}
+
+<p>L'assistant se compose de plusieurs chapitres que vous devez compléter pour réaliser l'analyse</p>
+
+<strong>Chapitre Zones libres</strong>
+
+<table class="zoneslibres">
+    
+        <thead>
+            <tr>
+                    <th>Type</th>
+                    <th>libelle</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+                {%for zoneslibres in societe.zonelibrehrs%}
+                <tr>
+                    <td>{{zoneslibres.nature}}</td>
+                    <td>{{zoneslibres.libelle}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('assistantparametragehrszoneslibresvaleur_show',{'idprojet':projet.id,'idsociete':societe.id,'idzonelibre':zoneslibres.id})}}">Consulter les valeurs</a></td>
+              
+                </tr>
+             {%endfor%}
+
+        </tbody>
+     </table>
+
+<a class="btn btn-primary" href="{{ path('assistantparametragehrszoneslibres_create',{'idprojet':projet.id,'idsociete':societe.id})}}">Créer une zones libres</a></br>
+
+{% endblock %}
