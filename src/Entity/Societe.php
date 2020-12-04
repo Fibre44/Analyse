@@ -115,6 +115,11 @@ class Societe
      */
     private $absences;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="societe", orphanRemoval=true)
+     */
+    private $etapes;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -128,6 +133,7 @@ class Societe
         $this->zonelibrehrs = new ArrayCollection();
         $this->tauxabsences = new ArrayCollection();
         $this->absences = new ArrayCollection();
+        $this->etapes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -566,6 +572,36 @@ class Societe
             // set the owning side to null (unless already changed)
             if ($absence->getSociete() === $this) {
                 $absence->setSociete(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Etape[]
+     */
+    public function getEtapes(): Collection
+    {
+        return $this->etapes;
+    }
+
+    public function addEtape(Etape $etape): self
+    {
+        if (!$this->etapes->contains($etape)) {
+            $this->etapes[] = $etape;
+            $etape->setSociete($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtape(Etape $etape): self
+    {
+        if ($this->etapes->removeElement($etape)) {
+            // set the owning side to null (unless already changed)
+            if ($etape->getSociete() === $this) {
+                $etape->setSociete(null);
             }
         }
 

@@ -26,6 +26,7 @@ use App\Entity\Tauxat;
 use App\Entity\Organisme;
 use App\Entity\Criteremaintien;
 use App\Entity\Tablemaintien;
+use App\Entity\Etape;
 
 use App\Repository\ProjetRepository;
 use App\Repository\SocieteRepository;
@@ -43,6 +44,7 @@ use App\Repository\CalendrierRepository;
 use App\Repository\HoraireRepository;
 use App\Repository\PrimeanciennetepopulationRepository;
 use App\Repository\CriteremaintienRepository;
+use App\Repository\EtapeRepository;
 
 use App\Form\SocieteType;
 use App\Form\EtablissementType;
@@ -100,15 +102,74 @@ class AssistantcreationsocieteController extends AbstractController
      /**
      * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/index", name="assistantcreationsociete_index")
      */
-    public function index(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete){
+    public function index(Request $request,ProjetRepository $repo,$idprojet,SocieteRepository $reposociete,$idsociete,Etaperepository $repoetape){
         $entityManager = $this->getDoctrine()->getManager();
 
         $projet = $repo->find($idprojet);
         $societe = $reposociete->find($idsociete);
+        //chapitre ccn
+        $etape_ccn =$repoetape->findOneBy(['etape'=>"chapitre_ccn",'societe'=>$societe->getId()]);       
+        if (empty($etape_ccn)){
+            $etape_ccn_valider="En cours de rédaction";
+        }
+        else{
 
+            if ($etape_ccn->getValider()==true){
+                $etape_ccn_valider="Etape valider";
+            }
+            else{
+                $etape_ccn_valider="En cours de rédaction";
+            }
+        }
+        //chapitre emploi
+        $etape_emploi =$repoetape->findOneBy(['etape'=>"chapitre_emploi",'societe'=>$societe->getId()]);       
+        if (empty($etape_emploi)){
+            $etape_emploi_valider="En cours de rédaction";
+        }
+        else{
+
+            if ($etape_emploi->getValider()==true){
+                $etape_emploi_valider="Etape valider";
+            }
+            else{
+                $etape_emploi_valider="En cours de rédaction";
+            }
+        }     
+        //chapitre analytique
+        $etape_analytique =$repoetape->findOneBy(['etape'=>"chapitre_analytique",'societe'=>$societe->getId()]);       
+        if (empty($etape_analytique)){
+            $etape_analytique_valider="En cours de rédaction";
+        }
+        else{
+
+            if ($etape_analytique->getValider()==true){
+                $etape_analytique_valider="Etape valider";
+            }
+            else{
+                $etape_analytique_valider="En cours de rédaction";
+            }
+        }
+        //chapitre etablissement
+        $etape_etablissement =$repoetape->findOneBy(['etape'=>"chapitre_etablissement",'societe'=>$societe->getId()]);       
+        if (empty($etape_etablissement)){
+            $etape_etablissement_valider="En cours de rédaction";
+        }
+        else{
+
+            if ($etape_etablissement->getValider()==true){
+                $etape_etablissement_valider="Etape valider";
+            }
+            else{
+                $etape_etablissement_valider="En cours de rédaction";
+            }
+        }              
         return $this->render('assistantcreationsociete/index.html.twig',[            
             'projet'=>$projet,
             'societe'=>$societe,
+            'etape_ccn'=>$etape_ccn_valider,
+            'etape_emploi'=>$etape_emploi_valider,
+            'etape_analytique'=>$etape_analytique_valider,
+            'etape_etablissement'=>$etape_etablissement_valider,
             'controller_name' => 'Assistant_index',
 
         ]);
@@ -936,6 +997,30 @@ class AssistantcreationsocieteController extends AbstractController
 
         return $this->redirectToRoute('assistantcreationsociete_show_ccn', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId()]);
         }
+    /**
+     * @Route("/assistantcreationsociete/projet/{idprojet}/societe/{idsociete}/{etape}/{valider}/new", name="assistantcreationsociete_create_etape")
+    */
 
-     
+      public function addetape (Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,EtapeRepository $repoetape,$idsociete,$etape,$valider){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repoprojet->find($idprojet);
+        $societe = $reposociete->find($idsociete);
+        $etapevalider = $repoetape->findOneBy(['etape'=>$etape,'societe'=>$societe->getId()]);
+
+        if (empty($etapevalider))  {//si l'étape n'existe pas
+            $etapevalider = new Etape($etape,$valider);
+        }
+        else{//sinon mettre à jour la validation
+            $etapevalider->setValider($valider);
+        }            
+        $societe->addEtape($etapevalider);
+        $entityManager->persist($etapevalider);
+        $entityManager->flush();
+            
+        return $this->redirectToRoute('assistantcreationsociete_index', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId()]);
+        
+ 
+      }
+
 }

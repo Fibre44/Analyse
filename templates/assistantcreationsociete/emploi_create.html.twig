@@ -37,5 +37,6 @@
            
         </tbody>
 </table>
-
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_create_etape',{'idprojet':projet.id,'idsociete':societe.id,'etape':"chapitre_emploi",'valider':"1"})}}">Cloturer le chapitre</a></br>
+<a class="btn btn-primary" href="{{ path('assistantcreationsociete_create_etape',{'idprojet':projet.id,'idsociete':societe.id,'etape':"chapitre_emploi",'valider':"0"})}}">Décloturer le chapitre</a></br>
  {%endblock%}

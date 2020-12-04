@@ -71,11 +71,17 @@ class Projet
      */
     private $archive;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Signature::class, mappedBy="projet", orphanRemoval=true)
+     */
+    private $signatures;
+
     public function __construct()
     {
         $this->societes = new ArrayCollection();
         $this->utilisateurs = new ArrayCollection();
         $this->journalprojets = new ArrayCollection();
+        $this->signatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +259,36 @@ class Projet
     public function setArchive(?bool $archive): self
     {
         $this->archive = $archive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Signature[]
+     */
+    public function getSignatures(): Collection
+    {
+        return $this->signatures;
+    }
+
+    public function addSignature(Signature $signature): self
+    {
+        if (!$this->signatures->contains($signature)) {
+            $this->signatures[] = $signature;
+            $signature->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSignature(Signature $signature): self
+    {
+        if ($this->signatures->removeElement($signature)) {
+            // set the owning side to null (unless already changed)
+            if ($signature->getProjet() === $this) {
+                $signature->setProjet(null);
+            }
+        }
 
         return $this;
     }
