@@ -87,6 +87,20 @@ class AssistantcreationsocieteController extends AbstractController
             
             $projet->addSociete($societe);
             $entityManager->persist($societe);
+            //alimentation de la table etape
+            $etape_ccn=new Etape("chapitre_ccn",false);
+            $etape_emploi=new Etape("chapitre_emploi",false);
+            $etape_analytique=new Etape("chapitre_analytique",false);
+            $etape_etablissement=new Etape("chapitre_etablissement",false);
+            $entityManager->persist($etape_ccn);
+            $societe->addEtape($etape_ccn);
+            $entityManager->persist($etape_emploi);
+            $societe->addEtape($etape_emploi);
+            $entityManager->persist($etape_analytique);
+            $societe->addEtape($etape_analytique);
+            $entityManager->persist($etape_etablissement);
+            $societe->addEtape($etape_etablissement);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('assistantcreationsociete_index', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId()]);
