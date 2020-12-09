@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RecetteController!{% endblock %}
+
+{% block body %}
+
+<p>Liste des anomalies<p/>
+
+ <table class="anomalies">
+    
+        <thead>
+            <tr>
+                
+                    <th>Id ticket</th>
+                    <th>Libelle</th>
+                    <th>Description</th>
+                    <th>Auteur</th>
+                    <th>Statut</th>
+
+             </tr>
+        
+        </thead>
+        <tbody>
+            {% for anomalie in projet.anomalies %}
+
+                <tr>
+                    <td>{{anomalie.id}}</td>
+                    <td>{{anomalie.libelle}}</td>
+                    <td>{{anomalie.descriptioncourte}}</td>
+                    <td>{{anomalie.auteur}}</td>
+                    <td>{{anomalie.statut}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('solution_create',{'idprojet':projet.id,'idanomalie':anomalie.id})}}">Proposer solution</a></td>
+         
+                </tr>
+            {%endfor%}
+
+        </tbody>
+     </table>
+<a class="btn btn-primary" href="{{ path('anomalie_create',{'idprojet':projet.id})}}">Créer un ticket</a></br>
+
+{% endblock %}

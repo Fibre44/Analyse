@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{%block body %}
+
+    <strong>Anomalie</strong>
+
+    {{form_start(formAnomalie)}}
+   
+    {{form_widget(formAnomalie)}}
+
+    <button type="submit" class="btn btn-primary">Créer une anomalie</button>
+
+    {{form_end(formAnomalie)}}
+{%endblock%}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{%block body %}
+
+    <strong>Solution</strong>
+
+    {{form_start(formSolution)}}
+   
+    {{form_widget(formSolution)}}
+
+    <button type="submit" class="btn btn-primary">Proposer solution</button>
+
+    {{form_end(formSolution)}}
+{%endblock%}
