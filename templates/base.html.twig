@@ -27,7 +27,7 @@
                 <a class="nav-link" href="{{ path('projet_analyse',{'idprojet':projet.id})}}">Cahiers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Reprise des données</a>
+                <a class="nav-link" href="{{ path('recette_index',{'idprojet':projet.id})}}">Recette</a>
             </li>
 
             {% if not app.user%}

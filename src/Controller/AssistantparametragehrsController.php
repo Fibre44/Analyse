@@ -64,7 +64,7 @@ class AssistantparametragehrsController extends AbstractController
 
     }
     /**
-     * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/zoneslibres", name="assistantparametragehrszoneslibres_create")
+     * @Route("projet/{idprojet}/assistantparametragehrs/societe/{idsociete}/zoneslibres/new", name="assistantparametragehrszoneslibres_create")
      */
     public function addzoneslibres(Request $request,ProjetRepository $repoprojet,$idprojet,SocieteRepository $reposociete,$idsociete)
     {

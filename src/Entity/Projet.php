@@ -307,7 +307,7 @@ class Projet
         return $this->anomalies;
     }
 
-    public function addAnomaly(Anomalie $anomaly): self
+    public function addAnomalie(Anomalie $anomaly): self
     {
         if (!$this->anomalies->contains($anomaly)) {
             $this->anomalies[] = $anomaly;
@@ -317,7 +317,7 @@ class Projet
         return $this;
     }
 
-    public function removeAnomaly(Anomalie $anomaly): self
+    public function removeAnomalie(Anomalie $anomaly): self
     {
         if ($this->anomalies->removeElement($anomaly)) {
             // set the owning side to null (unless already changed)
