@@ -29,7 +29,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('recette_index',{'idprojet':projet.id})}}">Recette</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('ticket_index',{'idprojet':projet.id})}}">Ticket</a>
+            </li>
             {% if not app.user%}
    
                 <li class"nav-item">

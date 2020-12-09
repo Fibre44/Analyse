@@ -81,6 +81,11 @@ class Projet
      */
     private $anomalies;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Test::class, mappedBy="projet", orphanRemoval=true)
+     */
+    private $tests;
+
     public function __construct()
     {
         $this->societes = new ArrayCollection();
@@ -88,6 +93,7 @@ class Projet
         $this->journalprojets = new ArrayCollection();
         $this->signatures = new ArrayCollection();
         $this->anomalies = new ArrayCollection();
+        $this->tests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -323,6 +329,36 @@ class Projet
             // set the owning side to null (unless already changed)
             if ($anomaly->getProjet() === $this) {
                 $anomaly->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Test[]
+     */
+    public function getTests(): Collection
+    {
+        return $this->tests;
+    }
+
+    public function addTest(Test $test): self
+    {
+        if (!$this->tests->contains($test)) {
+            $this->tests[] = $test;
+            $test->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTest(Test $test): self
+    {
+        if ($this->tests->removeElement($test)) {
+            // set the owning side to null (unless already changed)
+            if ($test->getProjet() === $this) {
+                $test->setProjet(null);
             }
         }
 

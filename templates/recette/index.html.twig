@@ -3,17 +3,15 @@
 {% block title %}Hello RecetteController!{% endblock %}
 
 {% block body %}
+<p>Liste des tests<p/>
 
-<p>Liste des anomalies<p/>
-
- <table class="anomalies">
+ <table class="tests">
     
         <thead>
             <tr>
                 
-                    <th>Id ticket</th>
+                    <th>Test</th>
                     <th>Libelle</th>
-                    <th>Description</th>
                     <th>Auteur</th>
                     <th>Statut</th>
 
@@ -21,21 +19,19 @@
         
         </thead>
         <tbody>
-            {% for anomalie in projet.anomalies %}
+            {% for tests in projet.tests %}
 
                 <tr>
-                    <td>{{anomalie.id}}</td>
-                    <td>{{anomalie.libelle}}</td>
-                    <td>{{anomalie.descriptioncourte}}</td>
-                    <td>{{anomalie.auteur}}</td>
-                    <td>{{anomalie.statut}}</td>
-                    <td><a class="btn btn-primary" href="{{ path('solution_create',{'idprojet':projet.id,'idanomalie':anomalie.id})}}">Proposer solution</a></td>
+                    <td>{{tests.libelle}}</td>
+                    <td>{{tests.description}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('testreponse_create',{'idprojet':projet.id,'idtest':tests.id})}}">Compléter le test</a></td>
          
                 </tr>
             {%endfor%}
 
         </tbody>
      </table>
-<a class="btn btn-primary" href="{{ path('anomalie_create',{'idprojet':projet.id})}}">Créer un ticket</a></br>
+
+<a class="btn btn-primary" href="{{ path('test_create',{'idprojet':projet.id})}}">Créer un test</a></br>
 
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{%block body %}
+
+    <strong>Test</strong>
+
+    {{form_start(formTest)}}
+   
+    {{form_widget(formTest)}}
+
+    <button type="submit" class="btn btn-primary">Créer un test</button>
+
+    {{form_end(formTest)}}
+{%endblock%}

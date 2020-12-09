@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{%block body %}
+
+    {% for testreponses in test.testreponses %}
+    <p>Auteur : {{testreponses.auteur}}</p>
+    <p>Message :{{testreponses.message}}</p>
+
+    {% endfor %}
+
+    <strong>Saisir une reponse</strong>
+
+    {{form_start(formTestreponse)}}
+   
+    {{form_widget(formTestreponse)}}
+
+    <button type="submit" class="btn btn-primary">Répondre</button>
+
+    {{form_end(formTestreponse)}}
+{%endblock%}
