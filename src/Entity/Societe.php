@@ -120,6 +120,11 @@ class Societe
      */
     private $etapes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Compteur::class, mappedBy="societe", orphanRemoval=true)
+     */
+    private $compteurs;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -134,6 +139,7 @@ class Societe
         $this->tauxabsences = new ArrayCollection();
         $this->absences = new ArrayCollection();
         $this->etapes = new ArrayCollection();
+        $this->compteurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -602,6 +608,36 @@ class Societe
             // set the owning side to null (unless already changed)
             if ($etape->getSociete() === $this) {
                 $etape->setSociete(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Compteur[]
+     */
+    public function getCompteurs(): Collection
+    {
+        return $this->compteurs;
+    }
+
+    public function addCompteur(Compteur $compteur): self
+    {
+        if (!$this->compteurs->contains($compteur)) {
+            $this->compteurs[] = $compteur;
+            $compteur->setSociete($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteur(Compteur $compteur): self
+    {
+        if ($this->compteurs->removeElement($compteur)) {
+            // set the owning side to null (unless already changed)
+            if ($compteur->getSociete() === $this) {
+                $compteur->setSociete(null);
             }
         }
 

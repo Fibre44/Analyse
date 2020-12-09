@@ -76,12 +76,18 @@ class Projet
      */
     private $signatures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Anomalie::class, mappedBy="projet", orphanRemoval=true)
+     */
+    private $anomalies;
+
     public function __construct()
     {
         $this->societes = new ArrayCollection();
         $this->utilisateurs = new ArrayCollection();
         $this->journalprojets = new ArrayCollection();
         $this->signatures = new ArrayCollection();
+        $this->anomalies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +293,36 @@ class Projet
             // set the owning side to null (unless already changed)
             if ($signature->getProjet() === $this) {
                 $signature->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Anomalie[]
+     */
+    public function getAnomalies(): Collection
+    {
+        return $this->anomalies;
+    }
+
+    public function addAnomaly(Anomalie $anomaly): self
+    {
+        if (!$this->anomalies->contains($anomaly)) {
+            $this->anomalies[] = $anomaly;
+            $anomaly->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnomaly(Anomalie $anomaly): self
+    {
+        if ($this->anomalies->removeElement($anomaly)) {
+            // set the owning side to null (unless already changed)
+            if ($anomaly->getProjet() === $this) {
+                $anomaly->setProjet(null);
             }
         }
 
