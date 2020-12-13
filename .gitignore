@@ -9,7 +9,7 @@
 /src/.preload.php
 /var/
 /vendor/
-/migrations/old
+/migrations/Old
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
