@@ -29,34 +29,23 @@ class ProjetController extends AbstractController
 
     public function racine()
     {
-    return $this->redirectToRoute('accueil');
+    return $this->redirectToRoute('projet_accueil');
 
     }
     /**
-     * @Route("/accueil", name="accueil")
+     * @Route("/accueil", name="projet_accueil")
      */
     public function index(ProjetRepository $repoprojet,UtilisateurRepository $repoutilisateur)
     {
         $entityManager = $this->getDoctrine()->getManager();
-
  
-        $projets=$repoprojet->findAll();
-        $totalprojet=0;
         $utilisateur=$this->getUser()->getUsername();
         $utilisteuractif=$repoutilisateur->findOneBy(['email'=>$utilisateur]);
-
-        
-        foreach ($projets as $totalitem)//Si le nbre de projet est à 0 alors on affichera créer un projet
-        {
-            $totalitem=$projets;
-            $totalprojet=$totalitem;
-        }
+      
 
         return $this->render('projet/index.html.twig', [
             'controller_name' => 'ProjetController',
-            'projets'=>$projets,
-            'total'=>$totalprojet,
-            'utilisateur'=>$utilisteuractif
+            'utilisateur'=>$utilisteuractif,
         ]);
     }
 
@@ -96,7 +85,10 @@ class ProjetController extends AbstractController
         }
         return $this->render('projet/create.html.twig',[
             'formProjet'=>$form->createView(),
-            'editMode'=>$projet->getid()!==null
+            'editMode'=>$projet->getid()!==null,
+            'controller_name' => 'Assistant_add_projet',
+
+
         ]);
     }
 
@@ -131,12 +123,14 @@ class ProjetController extends AbstractController
         }
         return $this->render('security/registration.html.twig',[
 
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'controller_name' => 'Assistant_add_projet_utilisateur',
+
         ]);
 
     }
     /**
-     * @Route("/projet/{idprojet}/cahier_analyse/all",name="projet_analyse")
+     * @Route("/projet/{idprojet}/cahier_analyse/show",name="projet_analyse")
     */
 
     public function show(ProjetRepository $repo,$idprojet){
@@ -152,8 +146,11 @@ class ProjetController extends AbstractController
             $totalsociete=$compteur;
         }
 
-        return $this->render('projet/show.html.twig',[
+        return $this->render('projet/cahier_analyse.html.twig',[
             'projet'=>$projet,
+            'totalsociete'=>$totalsociete,
+            'controller_name' => 'Cahier_analyse',
+
         ]);
     }
     /**
@@ -168,6 +165,8 @@ class ProjetController extends AbstractController
         
         return $this->render('projet/assistantecreationsociete.html.twig',[
             'projet'=>$projet,
+            'controller_name' => 'Assistant_creation',
+
 
         ]);
     }
@@ -187,6 +186,8 @@ class ProjetController extends AbstractController
         return $this->render('projet/assistantcreationparametragehrs.html.twig',[
             'projet'=>$projet,
             'societesprojet'=>$societes,
+            'controller_name' => 'Assistant_paramétrage',
+
         ]);
     }
     /**
@@ -199,6 +200,8 @@ class ProjetController extends AbstractController
         
         return $this->render('projet/tableaudebord.html.twig',[
             'projet'=>$projet,
+            'controller_name' => 'Tableau_de_bord',
+
         ]);
     }
 }

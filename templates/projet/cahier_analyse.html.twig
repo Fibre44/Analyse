@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+{% if totalsociete==0 %}
+    <p>Vous devez d'abord créer une société avec l'assistant<p>
+
+{% endif %}
+
+{% if totalsociete>0 %}
+
+<div class="juridique">
+    <strong>Structure juridique du projet</strong>
+
+        <table class="societes">
+        
+            <thead>
+                <tr>
+                    
+                        <th>Raisonsociale</th>
+                        <th>SIREN</th>
+                        <th>Adresse</th>
+                        <th>Code postal</th>
+                        <th>Ville</th>
+                </tr>
+            
+            </thead>
+            <tbody>
+
+
+                {%for societe in projet.societes %}
+                    <tr>
+                        <td>{{societe.raisonsociale}}</td>
+                        <td>{{societe.siren}}</td>
+                        <td>{{societe.adresse}}</td>
+                        <td>{{societe.codepostal}}</td>
+                        <td>{{societe.ville}}</td>
+
+                    </tr>
+                {%endfor%}
+
+            </tbody>
+        </table>
+
+        <strong>Liste des établissements</strong>
+
+        <table class="etablissement">
+        
+            <thead>
+                <tr>
+                        <th>Société</th>
+                        <th>Libellé établissement</th>
+                        <th>SIRET</th>
+                        <th>Adresse</th>
+                        <th>Code postal</th>
+                        <th>Ville</th>
+
+                </tr>
+            
+            </thead>
+            <tbody>
+
+                {%for societe in projet.societes %}
+                    {% for etablissement in societe.etablissements%}
+
+                    <tr>
+                        <th>{{societe.raisonsociale}}</td>
+                        <th>{{etablissement.libelle}}</td>
+                        <td>{{etablissement.nic}}</td>
+                        <td>{{etablissement.adresse}}</td>
+                        <td>{{etablissement.codepostal}}</td>
+                        <td>{{etablissement.ville}}</td>
+                    </tr>
+                    {%endfor%}
+
+                {%endfor%}
+
+            </tbody>
+        </table>
+        <strong>Liste des banques</strong>
+
+        <table class="banques">
+        
+            <thead>
+                <tr>
+                        <th>Libellé établissement</th>
+                        <th>IBAN</th>
+                        <th>BIC</th>
+                </tr>
+            
+            </thead>
+            <tbody>
+
+                {%for societe in projet.societes %}
+                    {% for etablissement in societe.etablissements%}
+                        {% for banque in etablissement.banques%}
+                        <tr>
+                            <th>{{etablissement.libelle}}</td>
+                            <td>{{banque.iban}}</td>
+                            <td>{{banque.bic}}</td>
+                        </tr>
+                        {%endfor%}
+
+                    {%endfor%}
+
+                {%endfor%}
+
+            </tbody>
+        </table>
+</div>
+
+<div class="classification">
+
+
+        <strong>Liste des codes emplois</strong>
+
+        <table class="emplois">
+    
+            <thead>
+                <tr>     
+                    <th>Raisonsociale</th>           
+                    <th>Code emploi</th>
+                    <th>Libellé emploi</th>
+                </tr>            
+            
+            </thead>
+                <tbody>
+                {%for societe in projet.societes %}
+                    {%for emploi in societe.emplois %}
+                        <tr>          
+                            <td>{{societe.raisonsociale}}</td>
+                            <td>{{emploi.codeemploi}}</td>
+                            <td>{{emploi.valeur}}</td>                                                  
+                        </tr>
+                    {%endfor%}
+                {%endfor%}
+            
+                </tbody>
+        </table>  
+</div>
+        <strong>Liste des rubriques</strong>
+
+        <table class="rubriques">
+        
+            <thead>
+                <tr>               
+                        <th>Raisonsociale</th>
+                        <th>SIREN</th>
+                        <th>Adresse</th>
+                        <th>Source</th>
+                        <th>Numero</th>               
+                        <th>Type</th>
+                        <th>Base</th> 
+                        <th>Taux</th>
+                        <th>Montant</th>      
+                        <th>DSN périodicté</th>      
+                </tr>               
+            
+            </thead>
+            <tbody>
+
+                {%for societe in projet.societes %}
+                    {%for rubrique in societe.rubriques %}
+                    <tr>
+                        <th>{{societe.raisonsociale}}</td>
+                        <td>{{societe.siren}}</td>
+                        <td>{{rubrique.type}}</td>
+                        <td>{{rubrique.numero}}</td>
+                        <td>{{rubrique.nature}}</td>
+                        <td>{{rubrique.base}}</td>
+                        <td>{{rubrique.taux}}</td>
+                        <td>{{rubrique.montant}}</td>
+                        <td>{{rubrique.dsnperiodeprime}}</td>                  
+                                    
+                    </tr>
+                    {%endfor%}
+
+                {%endfor%}            
+            </tbody>
+        </table>
+
+{% endif %}
+
+{% endblock %}

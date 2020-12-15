@@ -105,7 +105,7 @@ class SecurityController extends AbstractController
         $utilisteuractif->addConnexion($connexion);
         $entityManager->flush();
    
-        return $this->redirectToRoute('accueil');
+        return $this->redirectToRoute('projet_accueil');
 
 
     }

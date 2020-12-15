@@ -107,7 +107,8 @@ class AssistantcreationsocieteController extends AbstractController
         }
         return $this->render('assistantcreationsociete/societe_create.html.twig',[
             'formSociete'=>$form->createView(),
-            'controller_name' => 'Assistant_créer_société',
+            'projet'=>$projet,
+            'controller_name' => 'Assistant_add_société',
 
         ]);
 
