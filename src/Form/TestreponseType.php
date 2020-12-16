@@ -13,7 +13,7 @@ class TestreponseType extends AbstractType
     {
         $builder
             ->add('message')
-            ->add('auteur')
+            //->add('auteur')
             //->add('date')
             //->add('test')
         ;

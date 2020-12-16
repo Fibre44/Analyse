@@ -41,6 +41,16 @@ class Test
      */
     private $testreponses;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $auteur;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
+
     public function __construct()
     {
         $this->testreponses = new ArrayCollection();
@@ -114,6 +124,30 @@ class Test
                 $testreponse->setTest(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(string $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

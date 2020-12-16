@@ -60,9 +60,10 @@ class ProjetController extends AbstractController
         $utilisateur=new Utilisateur();
         $utilisateur = $repoutilisateur->findby([
             'email'=>$this->getUser()->getUsername()]);//on récupére l'email pour fabriquer l'utilisateur
-            
-       $projet= new Projet();
-                
+        
+        if ($projet=null){
+            $projet= new Projet();
+        }                    
         $form = $this->createForm(ProjetType::class,$projet);
 
         $form->handleRequest($request);
@@ -81,15 +82,31 @@ class ProjetController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('projet_addutilisateur', ['idprojet' => $projet->getId()]);
+            return $this->redirectToRoute('projet_gestion', ['idprojet' => $projet->getId()]);
         }
         return $this->render('projet/create.html.twig',[
             'formProjet'=>$form->createView(),
-            'editMode'=>$projet->getid()!==null,
             'controller_name' => 'Assistant_add_projet',
 
 
         ]);
+    }
+
+    /**
+     * @Route("/projet/{idprojet}/gestion",name="projet_gestion")
+    */
+
+    public function gestion(Request $request,ProjetRepository $repo,$idprojet){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+
+        return $this->render('projet/gestion.html.twig',[
+            'projet'=>$projet,
+            'controller_name' => 'projet_gestion',
+        ]);
+
     }
 
     /**
@@ -129,6 +146,7 @@ class ProjetController extends AbstractController
         ]);
 
     }
+
     /**
      * @Route("/projet/{idprojet}/cahier_analyse/show",name="projet_analyse")
     */

@@ -24,6 +24,9 @@
                 <tr>
                     <td>{{tests.libelle}}</td>
                     <td>{{tests.description}}</td>
+                    <td>{{tests.auteur}}</td>
+                    <td>{{tests.statut}}</td>
+
                     <td><a class="btn btn-primary" href="{{ path('testreponse_create',{'idprojet':projet.id,'idtest':tests.id})}}">Compléter le test</a></td>
          
                 </tr>

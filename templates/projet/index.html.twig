@@ -25,7 +25,7 @@
                     <td>{{projet.sic}}</td>
                     <td>{{projet.description}}</td>
                     <td><a href="{{ path('projet_tableau_de_bord', {'idprojet':projet.id})}}" class="btn btn-primary">Accéder au projet</a></td>
-                    <td><a href="{{ path('projet_edit', {'idprojet':projet.id})}}" class="btn btn-primary">Editer le projet</a></td>
+                    <td><a href="{{ path('projet_gestion', {'idprojet':projet.id})}}" class="btn btn-primary">Editer le projet</a></td>
                 </tr>
             {%endfor%}
         </tbody>

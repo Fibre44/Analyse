@@ -32,7 +32,7 @@ class Projet
 
     /**
      * @ORM\Column(type="string", length=9)
-     * @Assert\Length(min=9, max=9)
+     * @Assert\length(min=9, max=9)
      */
     private $sic;
 

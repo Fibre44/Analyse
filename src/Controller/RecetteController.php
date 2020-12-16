@@ -55,9 +55,11 @@ class RecetteController extends AbstractController
             
             $projet->addTest($test);
             $entityManager->persist($test);
+            $test->setAuteur($this->getUser()->getUsername());
+            $test->setStatut('Nouveau');
             $entityManager->flush();
 
-            return $this->redirectToRoute('testreponse_create', ['idprojet' => $projet->getId(),'idtest' => $test->getId()]);
+            return $this->redirectToRoute('recette_index', ['idprojet' => $projet->getId()]);
         }
 
         return $this->render('recette/test_create.html.twig', [
@@ -84,6 +86,7 @@ class RecetteController extends AbstractController
             
             $test->addTestreponse($testreponse);
             $entityManager->persist($testreponse);
+            $testreponse->setAuteur($this->getUser()->getUsername());
             $entityManager->flush();
 
             return $this->redirectToRoute('recette_index', ['idprojet' => $projet->getId()]);
