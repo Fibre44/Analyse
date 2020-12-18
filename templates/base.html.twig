@@ -19,8 +19,11 @@
 
                 {% if controller_name == "projet_gestion" %}            
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('projet_addutilisateur',{'idprojet':projet.id})}}">Ajouter un utilisateur</a>
-                    </li>            
+                        <a class="nav-link" href="{{ path('projet_addutilisateur',{'idprojet':projet.id})}}">Ajouter un client</a>
+                    </li>     
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('projet_addutilisateurcegid',{'idprojet':projet.id})}}">Ajouter un utilisateur CEGID</a>
+                    </li>          
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('projet_edit',{'idprojet':projet.id})}}">Editer le projet</a>
                     </li>

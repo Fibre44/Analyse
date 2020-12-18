@@ -257,7 +257,7 @@ class AssistantcreationsocieteController extends AbstractController
                 $ccn->setOrigine('Projet');
                 $entityManager->flush();
 
-                return $this->redirectToRoute('assistantcreationsociete_add_classification', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId()]);
+                return $this->redirectToRoute('assistantcreationsociete_show_ccn', ['idprojet' => $projet->getId(),'idsociete'=>$societe->getId(),'idccn'=>$ccn->getId()]);
 
             }
             else {//sinon on importe les classifications depuis la bibliotheque

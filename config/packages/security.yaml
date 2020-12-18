@@ -39,3 +39,5 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: '^/accueil', roles: [IS_AUTHENTICATED_FULLY] }
         - { path: '^/projet', roles: [IS_AUTHENTICATED_FULLY] }
+        - { path: '^/plandepaie', roles: [IS_AUTHENTICATED_FULLY] }
+        - { path: '^/bibliothequeccn', roles: [IS_AUTHENTICATED_FULLY] }

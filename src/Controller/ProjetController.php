@@ -60,19 +60,17 @@ class ProjetController extends AbstractController
         $utilisateur=new Utilisateur();
         $utilisateur = $repoutilisateur->findby([
             'email'=>$this->getUser()->getUsername()]);//on récupére l'email pour fabriquer l'utilisateur
-        
-        if ($projet=null){
-            $projet= new Projet();
-        }                    
+              
+        $projet= new Projet();
+                        
         $form = $this->createForm(ProjetType::class,$projet);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            if(!$projet->getId()){
-            $projet->setCreateAt(new \DateTime());
-            }
-            foreach($utilisateur as $utilisateurs){
+
+                foreach($utilisateur as $utilisateurs){
+                $projet->setCreateAt(new \DateTime());
                 $entityManager->persist($projet);//on fait persister le l'id projet
                 $utilisateurs->addProjet($projet);//on ajoute le projet
                 $entityManager->persist($utilisateurs);
@@ -142,6 +140,24 @@ class ProjetController extends AbstractController
 
             'form'=>$form->createView(),
             'controller_name' => 'Assistant_add_projet_utilisateur',
+
+        ]);
+
+    }
+    /**
+     * @Route("/projet/{idprojet}/utilisateur/cegid/new",name="projet_addutilisateurcegid")
+    */
+
+    public function addutilisateurcegid(Request $request,UtilisateurRepository $repoutilisateur,ProjetRepository $repo,$idprojet){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $projet = $repo->find($idprojet);
+        $utilisateurscegid = $repoutilisateur->findOneBy(['groupe'=>"Consultant"]);
+
+        return $this->render('projet/showutilisateurcegid.html.twig',[
+            'projet'=>$projet,
+            'utilisateurscegid'=>$utilisateurscegid,
+            'controller_name' => 'Assistant_add_projet_utilisateur_cegid',
 
         ]);
 

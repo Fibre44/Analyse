@@ -19,6 +19,8 @@ use App\Entity\Projet;
 use App\Entity\Conventioncollective;
 use App\Entity\Annuaireorganisme;
 use App\Entity\Bibliothequemodification;
+use App\Entity\Bibliothequepopulationplandepaie;
+use App\Entity\Bibliothequeplandepaie;
 
 use App\Repository\BibliothequeccnRepository;
 use App\Repository\BibliothequeclassificationRepository;
@@ -30,6 +32,7 @@ use App\Repository\BibliothequesmcpopulationRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\UtilisateurRepository;
 use App\Repository\ConventioncollectiveRepository;
+use App\Repository\BibliothequepopulationplandepaieRepository;
 
 use App\Form\BibliothequeccnType;
 use App\Form\BibliothequeclassificationType;
@@ -41,6 +44,8 @@ use App\Form\BibliothequesmcvaleurType;
 use App\Form\BibliothequesmcpopulationType;
 use App\Form\AnnuaireorganismeType;
 use App\Form\BibliothequemodificationType;
+use App\Form\BibliothequepopulationplandepaieType;
+use App\Form\BibliothequeplandepaieType;
 
 
 
@@ -242,7 +247,8 @@ class BibliothequeccnController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             
-            $bibliothequeprimeanciennete->addYe($bibliothequeprimeanciennetevaleur);
+            $bibliothequeprimeanciennete->addBibliothequeprimeanciennetevaleur($bibliothequeprimeanciennetevaleur);
+            $bibliothequeprimeanciennetevaleur->setEtendu($bibliothequeprimeanciennete->getEtendu());
             $entityManager->persist($bibliothequeprimeanciennetevaleur);
             $entityManager->flush();
 
@@ -303,6 +309,7 @@ class BibliothequeccnController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             
             $bibliothequesmcpopulation->addBibliothequesmcvaleur($bibliothequesmcvaleur);
+            $bibliothequesmcvaleur->setEtendu($bibliothequesmcpopulation->getEtendu());
             $entityManager->persist($bibliothequesmcvaleur);
             $entityManager->flush();
 
@@ -446,6 +453,76 @@ class BibliothequeccnController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/plandepaie/population/show", name="populationplandepaie_show")
+    */ 
+
+    public function showbibliothequepopulationplandepaie(BibliothequepopulationplandepaieRepository $repobibliothequepopulationplandepaie){
+
+        $bibliothequepopulationplandepaie = $repobibliothequepopulationplandepaie->findAll();
+
+        return $this->render('bibliothequeccn/bibliothequepopulationplandepaie_show.html.twig',[
+            'controller_name' => 'bibliotheque_show_populationplandepaie',
+            'bibliothequepopulationplandepaie'=>$bibliothequepopulationplandepaie,
+
+        ]);
+
+    }
+
+    /**
+     * @Route("/plandepaie/population/new", name="populationplandepaie_create")
+    */
+    
+    public function addbibliothequepopulationplandepaie(Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $bibliothequepopulationplandepaie= new Bibliothequepopulationplandepaie;
+        
+        $form = $this->createForm(BibliothequepopulationplandepaieType::class, $bibliothequepopulationplandepaie);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $entityManager->persist($bibliothequepopulationplandepaie);           
+            $entityManager->flush();
+            return $this->redirectToRoute('plandepaie_create', ['idpopulationplandepaie'=>$bibliothequepopulationplandepaie->getId()]);
+
+        }
+        return $this->render('bibliothequeccn/bibliothequepopulationplandepaie_create.html.twig',[
+            'controller_name' => 'bibliotheque_add_modification',
+            'formBibliothequepopulationplandepaie'=>$form->createView()
+            ]);
+    }
+    
+    /**
+     * @Route("/plandepaie/population/{idpopulationplandepaie}/new", name="plandepaie_create")
+    */
+
+    public function addbibliothequeplandepaie(Request $request,BibliothequepopulationplandepaieRepository $repobibliothequepopulationplandepaie, $idpopulationplandepaie){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $bibliothequepopulationplandepaie = $repobibliothequepopulationplandepaie->find($idpopulationplandepaie);
+        $bibliothequeplandepaie = new Bibliothequeplandepaie;
+
+        $form = $this->createForm(BibliothequeplandepaieType::class, $bibliothequeplandepaie);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $bibliothequepopulationplandepaie->addBibliothequeplandepaie($bibliothequeplandepaie);
+            $entityManager->persist($bibliothequeplandepaie);           
+            $entityManager->flush();
+            return $this->redirectToRoute('plandepaie_create', ['idpopulationplandepaie'=>$bibliothequepopulationplandepaie->getId()]);
+
+        }
+        return $this->render('bibliothequeccn/bibliothequeplandepaie_create.html.twig',[
+            'controller_name' => 'bibliotheque_add_modification',
+            'formBibliothequeplandepaie'=>$form->createView()
+            ]);
+
+
+    }
+
     /**
      * @Route("/bibliothequeccn/proposerccn/{idbibliothequeccn}/demande/ancienid/{ancienid}/ancienvaleur/{ancienvaleur}/new", name="bibliotheque_demande_create")
     */

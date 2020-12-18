@@ -4,6 +4,32 @@
 
  <p>Gestion du projet {{projet.titre}}</p>
 
+<strong>Liste des utilisateurs du projet</strong>
+
+<table class="projets">
+
+    <thead>
+        <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Groupe</th>
+                <th>email</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        {% for utilisateurs in projet.utilisateurs %}
+
+                <tr>
+                    <th>{{utilisateurs.nom}}</td>
+                    <td>{{utilisateurs.prenom}}</td>
+                    <td>{{utilisateurs.groupe}}</td>
+                    <td>{{utilisateurs.email}}</td> 
+                </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
 
 
 {%endblock%}

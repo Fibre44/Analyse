@@ -18,7 +18,7 @@
             <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ path ('bibliothequeccn') }}">Liste des conventions collectives de la biliotheque</a>
+                <a class="nav-link" href="{{ path ('bibliothequeccn') }}">Liste des conventions collectives de la bibliotheque</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('bibliotheque_proposerccn_show') }}">Proposer une convention collective</a>
@@ -28,6 +28,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('annuaireorganisme_create') }}">Organisme</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('populationplandepaie_show') }}">Plan de paie</a>
             </li>
             {% if not app.user%}
    
