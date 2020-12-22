@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <strong>Liste des utilisateurs Cegid<p>
+
+    {% for listeutilisateurscegid in utilisateurscegid %}
+
+    <p<{{listeutilisateurscegid.email}}</p>
+
+    {% endfor %}
+
+{% endblock %}

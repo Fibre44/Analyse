@@ -1,0 +1,36 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>{{bibliothequepopulationplandepaie.population}}</h1>
+    <table class="coefficients">
+        
+            <thead>
+                <tr>
+                    <th>Nature</th>
+                    <th>Libellé</th>
+               
+
+                </tr>
+            
+            </thead>
+            <tbody>
+                {% for listebibliothqueplandepaie in bibliothequepopulationplandepaie.bibliothequeplandepaies %}
+
+                    <tr>
+                        <td>{{listebibliothqueplandepaie.naturerub}}</td>
+                        <td>{{listebibliothqueplandepaie.libelle}}</td>
+                       
+                    </tr>
+                
+                {%endfor%}
+                
+            </tbody>
+    </table>
+
+     
+    <a href="{{ path('populationplandepaie_create')}}" class="btn btn-primary">Ajouter une population</a>
+
+
+
+{%endblock%}

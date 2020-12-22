@@ -1,0 +1,15 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une population</h1>
+
+    {{form_start(formBibliothequeplandepaie)}}
+    {{form_widget(formBibliothequeplandepaie)}}
+    <button type="submit" class="btn btn-primary">Créer une population </button>
+
+    {{form_end(formBibliothequeplandepaie)}}
+
+
+
+{%endblock%}

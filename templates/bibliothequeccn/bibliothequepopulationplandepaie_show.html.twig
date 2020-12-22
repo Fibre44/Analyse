@@ -1,0 +1,39 @@
+{% extends 'base_bibliotheque.html.twig' %}
+
+{%block body %}
+
+    <h1>Créer une population</h1>
+    <table class="coefficients">
+        
+            <thead>
+                <tr>
+                    <th>Logiciel</th>
+                    <th>Régime SS</th>
+                    <th>Régime population</th>
+                    <th>Consulter</th>
+
+                </tr>
+            
+            </thead>
+            <tbody>
+                {% for listebibliothequepopulationplandepaie in bibliothequepopulationplandepaie %}
+
+                    <tr>
+                        <td>{{listebibliothequepopulationplandepaie.logiciel}}</td>
+                        <td>{{listebibliothequepopulationplandepaie.regimess}}</td>
+                        <td>{{listebibliothequepopulationplandepaie.population}}</td>
+                        <td><a href="{{ path('plandepaie_show',{'idpopulationplandepaie':listebibliothequepopulationplandepaie.id})}}" class="btn btn-primary">Ajouter une population</a></td>
+
+                    </tr>
+                
+                {%endfor%}
+                
+            </tbody>
+    </table>
+
+     
+    <a href="{{ path('populationplandepaie_create')}}" class="btn btn-primary">Ajouter une population</a>
+
+
+
+{%endblock%}
