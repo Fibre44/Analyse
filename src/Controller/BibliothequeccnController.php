@@ -519,9 +519,23 @@ class BibliothequeccnController extends AbstractController
             'controller_name' => 'bibliotheque_add_modification',
             'formBibliothequeplandepaie'=>$form->createView()
             ]);
+    }
+    /**
+     * @Route("/plandepaie/population/{idpopulationplandepaie}/show", name="plandepaie_show")
+    */ 
 
+    public function showbibliothequeplandepaie(BibliothequepopulationplandepaieRepository $repobibliothequepopulationplandepaie,$idpopulationplandepaie){
+
+        $bibliothequepopulationplandepaie = $repobibliothequepopulationplandepaie->find($idpopulationplandepaie);
+
+        return $this->render('bibliothequeccn/bibliothequeplandepaie_show.html.twig',[
+            'controller_name' => 'bibliotheque_show_populationplandepaie',
+            'bibliothequepopulationplandepaie'=>$bibliothequepopulationplandepaie,
+
+        ]);
 
     }
+
 
     /**
      * @Route("/bibliothequeccn/proposerccn/{idbibliothequeccn}/demande/ancienid/{ancienid}/ancienvaleur/{ancienvaleur}/new", name="bibliotheque_demande_create")
