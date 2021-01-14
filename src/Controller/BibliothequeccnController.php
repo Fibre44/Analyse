@@ -33,6 +33,7 @@ use App\Repository\ProjetRepository;
 use App\Repository\UtilisateurRepository;
 use App\Repository\ConventioncollectiveRepository;
 use App\Repository\BibliothequepopulationplandepaieRepository;
+use App\Repository\AnnuaireorganismeRepository;
 
 use App\Form\BibliothequeccnType;
 use App\Form\BibliothequeclassificationType;
@@ -104,7 +105,9 @@ class BibliothequeccnController extends AbstractController
         }
 
         return $this->render('bibliothequeccn/bibliothequeccn_create.html.twig', [
-            'formCcn'=>$form->createView()
+            'formCcn'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
 
@@ -133,7 +136,8 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/bibliothequeclassification_create.html.twig',[
             'bibliothequeccn'=>$bibliothequeccn,
-            'formClassification'=>$form->createView()
+            'formClassification'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
     
         ]);
     }
@@ -163,7 +167,9 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/bibliothequecriteremaintien_create.html.twig', [
             'bibliothequeccn'=>$bibliothequeccn,
-            'formCriteremaintien'=>$form->createView()
+            'formCriteremaintien'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
     
@@ -196,7 +202,9 @@ class BibliothequeccnController extends AbstractController
         return $this->render('bibliothequeccn/bibliothequetablemaintien_create.html.twig', [
             'bibliothequeccn'=>$bibliothequeccn,
             'bibliothequecriteremaitien'=>$bibliothequecriteremaintien,
-            'formTauxmaintien'=>$form->createView()
+            'formTauxmaintien'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
     
@@ -225,7 +233,9 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/bibliothequeprimeanciennetepopulation_create.html.twig', [
             'bibliothequeccn'=>$bibliothequeccn,
-            'formPrimeanciennetepopulation'=>$form->createView()
+            'formPrimeanciennetepopulation'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
 
@@ -257,7 +267,9 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/bibliothequeprimeanciennetevaleur.html.twig', [
             'bibliothequeccn'=>$bibliothequeccn,
-            'formPrimeanciennetevaleur'=>$form->createView()
+            'formPrimeanciennetevaleur'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
     /**
@@ -286,7 +298,9 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/smcpopulation_create.html.twig', [
             'bibliothequeccn'=>$bibliothequeccn,
-            'formSmcpopulation'=>$form->createView()
+            'formSmcpopulation'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
 
@@ -318,7 +332,9 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/smcvaleur_create.html.twig', [
             'bibliothequeccn'=>$bibliothequeccn,
-            'formSmcvaleur'=>$form->createView()
+            'formSmcvaleur'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
         ]);
     }
     /**
@@ -346,7 +362,8 @@ class BibliothequeccnController extends AbstractController
 
         return $this->render('bibliothequeccn/ccnprojet_show.html.twig', [
             'ccnprojet'=>$ccnprojet,
-            'controller_name' => 'showccnprojet',
+            'controller_name' => 'BibliothequeccnController',
+            
         ]);
 
     }
@@ -418,11 +435,26 @@ class BibliothequeccnController extends AbstractController
 
             return $this->render('bibliothequeccn/bibliothequeccnimport_echec.html.twig', [
                 'ccn'=>$ccnbibliotheque,
-                'controller_name' => 'echecccnprojet',
+                'controller_name' => 'BibliothequeccnController',
             ]);
         }
 
     }
+
+    /**
+     * @Route("/annuaire/organisme/show", name="annuaireorganisme_show")
+    */
+    public function showannuaireorganisme(AnnuaireorganismeRepository $repoannuaire){
+        
+        $annuaireorganisme = $repoannuaire->findAll();
+
+        return $this->render('bibliothequeccn/annuaireorganisme_show.html.twig', [
+            'annuaireorganisme'=>$annuaireorganisme,
+            'controller_name' => 'BibliothequeccnController',
+        ]);
+    }
+
+
     /**
      * @Route("/annuaire/organisme/new", name="annuaireorganisme_create")
     */
@@ -444,11 +476,12 @@ class BibliothequeccnController extends AbstractController
             
             $entityManager->flush();
 
-            return $this->redirectToRoute('annuaireorganisme_create', []);
+            return $this->redirectToRoute('annuaireorganisme_show', []);
         }
         return $this->render('bibliothequeccn/annuaireorganisme_create.html.twig',[
-            'controller_name' => 'bibliotheque_add_annuaire_organisme',
-            'formAnnuaireorganisme'=>$form->createView()
+            'formAnnuaireorganisme'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
 
         ]);
 
@@ -463,8 +496,8 @@ class BibliothequeccnController extends AbstractController
         $bibliothequepopulationplandepaie = $repobibliothequepopulationplandepaie->findAll();
 
         return $this->render('bibliothequeccn/bibliothequepopulationplandepaie_show.html.twig',[
-            'controller_name' => 'bibliotheque_show_populationplandepaie',
             'bibliothequepopulationplandepaie'=>$bibliothequepopulationplandepaie,
+            'controller_name' => 'BibliothequeccnController',
 
         ]);
 
@@ -490,7 +523,7 @@ class BibliothequeccnController extends AbstractController
 
         }
         return $this->render('bibliothequeccn/bibliothequepopulationplandepaie_create.html.twig',[
-            'controller_name' => 'bibliotheque_add_modification',
+            'controller_name' => 'BibliothequeccnController',
             'formBibliothequepopulationplandepaie'=>$form->createView()
             ]);
     }
@@ -529,13 +562,12 @@ class BibliothequeccnController extends AbstractController
         $bibliothequepopulationplandepaie = $repobibliothequepopulationplandepaie->find($idpopulationplandepaie);
 
         return $this->render('bibliothequeccn/bibliothequeplandepaie_show.html.twig',[
-            'controller_name' => 'bibliotheque_show_populationplandepaie',
+            'controller_name' => 'BibliothequeccnController',
             'bibliothequepopulationplandepaie'=>$bibliothequepopulationplandepaie,
 
         ]);
 
     }
-
 
     /**
      * @Route("/bibliothequeccn/proposerccn/{idbibliothequeccn}/demande/ancienid/{ancienid}/ancienvaleur/{ancienvaleur}/new", name="bibliotheque_demande_create")
@@ -558,7 +590,7 @@ class BibliothequeccnController extends AbstractController
 
         }
         return $this->render('bibliothequeccn/modification_create.html.twig',[
-            'controller_name' => 'bibliotheque_add_modification',
+            'controller_name' => 'BibliothequeccnController',
             'formBibliothquemodification'=>$form->createView()
             ]);
         }

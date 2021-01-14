@@ -16,6 +16,25 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">                 
+                {% if controller_name == "BibliothequeccnController" %}          
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path ('bibliothequeccn') }}">Liste des conventions collectives de la bibliotheque</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('bibliotheque_proposerccn_show') }}">Proposer une convention collective</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('bibliothequeccn_create') }}">Créer une nouvelle convention collective</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('annuaireorganisme_show') }}">Annuaire organismes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('populationplandepaie_show') }}">Plan de paie</a>
+                    </li>
+                {% endif %}
+
 
                 {% if controller_name == "projet_gestion" %}            
                     <li class="nav-item">
@@ -29,7 +48,7 @@
                     </li>
                 {% endif %}
 
-                {% if controller_name != "Assistant_add_projet" and controller_name != "projet_gestion" %}            
+                {% if controller_name != "Assistant_add_projet" and controller_name != "projet_gestion" and controller_name != "BibliothequeccnController" %}            
                     <li class="nav-item">
                         <a class="nav-link" href="">Tableau de bord projet</a>
                     </li>                    

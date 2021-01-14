@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire Organisme{% endblock %}
+
+{% block body %}
+
+<table class="ccn">
+
+    <thead>
+            <tr>
+                <th>Libellé</th>
+                <th>Type</th>
+                <th>Adresse</th>
+                <th>Code postal</th>     
+                <th>Ville</th>
+            </tr>
+        
+        </thead>
+        <tbody>
+            {%for organismes in annuaireorganisme %}
+                <tr>
+                    <th>{{organismes.libelle}}</td>
+                    <td>{{organismes.type}}</td>
+                    <td>{{organismes.adresse}}</td>
+                    <td>{{organismes.codepostal}}</td>
+                    <td>{{organismes.ville}}</td>
+                    <td><a href="" class="btn btn-primary">Editer</a></td>
+                </tr>
+            {%endfor%}
+
+        </tbody>
+     </table>
+<a href="{{ path('annuaireorganisme_create')}}" class="btn btn-primary">Créer un organisme</a>
+
+
+{% endblock %}
