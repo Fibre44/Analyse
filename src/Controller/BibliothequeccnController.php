@@ -112,7 +112,7 @@ class BibliothequeccnController extends AbstractController
     }
     
     /**
-     * @Route("/bibliothequeccn/{idbibliothequeccn}/classification/new", name="bibliothequeccn_chapitre")
+     * @Route("/bibliothequeccn/{idbibliothequeccn}/chapitre", name="bibliothequeccn_chapitre")
     */
 
     public function bibliothequeccn_chapitre(Request $request,BibliothequeccnRepository $repobibliothequeccn,$idbibliothequeccn){
