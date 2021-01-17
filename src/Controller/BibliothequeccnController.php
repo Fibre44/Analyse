@@ -101,7 +101,7 @@ class BibliothequeccnController extends AbstractController
             $entityManager->persist($bibliothequeccn);
             $entityManager->flush();
 
-            return $this->redirectToRoute('bibliotheque_classification_create', ['idbibliothequeccn'=>$bibliothequeccn->getId()]);
+            return $this->redirectToRoute('bibliotheque_chapitre.html.twig', ['idbibliothequeccn'=>$bibliothequeccn->getId()]);
         }
 
         return $this->render('bibliothequeccn/bibliothequeccn_create.html.twig', [

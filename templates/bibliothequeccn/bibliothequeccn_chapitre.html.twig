@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{%block body %}
+
+<strong>Création de la CCN {% idbibliothequeccn.libelle %}</strong></br>
+<p>Liste des classifications de la CCN</p>
+
+
+<a class="nav-link" href="{{ path('bibliotheque_classification_create',{'idbibliothequeccn':idbibliothequeccn.id})}}">Ajouter des classifications</a>
+
+<a class="nav-link" href="{{ path('bibliotheque_criteremaintien_create',{'idbibliothequeccn':idbibliothequeccn.id})}}">Ajouter une grille de maintien</a>
+
+<a class="nav-link" href="{{ path('bibliotheque_primeanciennetepopulation_create',{'idbibliothequeccn':idbibliothequeccn.id})}}">Ajouter une grille de maintien</a>
+
+{%endblock%}
