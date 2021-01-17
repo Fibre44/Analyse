@@ -101,11 +101,27 @@ class BibliothequeccnController extends AbstractController
             $entityManager->persist($bibliothequeccn);
             $entityManager->flush();
 
-            return $this->redirectToRoute('bibliothequeccn_chapitre.html.twig', ['idbibliothequeccn'=>$bibliothequeccn->getId()]);
+            return $this->redirectToRoute('bibliothequeccn_chapitre', ['idbibliothequeccn'=>$bibliothequeccn->getId()]);
         }
 
         return $this->render('bibliothequeccn/bibliothequeccn_create.html.twig', [
             'formCcn'=>$form->createView(),
+            'controller_name' => 'BibliothequeccnController',
+
+        ]);
+    }
+    
+    /**
+     * @Route("/bibliothequeccn/{idbibliothequeccn}/classification/new", name="bibliothequeccn_chapitre")
+    */
+
+    public function bibliothequeccn_chapitre(Request $request,BibliothequeccnRepository $repobibliothequeccn,$idbibliothequeccn){
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $bibliothequeccn = $repobibliothequeccn->find($idbibliothequeccn);
+
+        return $this->render('bibliothequeccn/bibliothequeccn_chapitre.html.twig', [
+            'idbibliothequeccn'=>$bibliothequeccn,
             'controller_name' => 'BibliothequeccnController',
 
         ]);
@@ -143,9 +159,9 @@ class BibliothequeccnController extends AbstractController
     }
 
     /**
-     * @Route("/bibliothequeccn/{idbibliothequeccn}/criteremaintien/new", name="bibliotheque_criteremaintien_create")
+     * @Route("/bibliothequeccn/{idbibliothequeccn}/chapitre", name="bibliotheque_criteremaintien_create")
     */
-
+    
     public function addbibliothequecriteremaintien(Request $request,BibliothequeccnRepository $repobibliothequeccn,$idbibliothequeccn)
     {
 
